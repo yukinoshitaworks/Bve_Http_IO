@@ -1,0 +1,7 @@
+BveTs Vehicle 2.00
+PerformanceCurve = ..\..\Rock_On\Train\JR\Vehicle\115\notch\notch.txt
+Parameters = ..\..\Rock_On\Train\JR\Formation\taka\Param\T1040.txt
+Panel = ..\..\Rock_On\Train\JR\Vehicle\115\panel_T\panel2.cfg
+Sound = ..\..\Rock_On\Train\JR\Formation\taka\Sound\Mc115-1030.txt
+Ats32 = ..\..\Rock_On\Train\JR\Formation\taka\Detail\T1040\DetailManager.dll
+MotorNoise = ..\..\Rock_On\Train\JR\Vehicle\115\motornoise\motornoise.txt

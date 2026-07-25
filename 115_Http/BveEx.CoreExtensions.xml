@@ -1,0 +1,1311 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BveEx.CoreExtensions</name>
+    </assembly>
+    <members>
+        <member name="T:BveEx.Extensions.ConductorPatch.ConductorPatch">
+            <summary>
+            車掌動作を上書きするパッチを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.ConductorPatch.ConductorPatch.Conductor">
+            <summary>
+            新しい車掌動作を定義した <see cref="T:BveEx.Extensions.ConductorPatch.ConductorBase"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.ConductorPatch.ConductorPatch.Priority">
+            <summary>
+            車掌動作の上書き宣言の優先度を取得します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.ConductorPatch.DeclarationPriority">
+            <summary>
+            車掌動作の上書き宣言の優先度を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.ConductorPatch.DeclarationPriority.AsDefaultValue">
+            <summary>
+            既定値として宣言することを指定します。他に宣言が存在する場合は無条件に上書きされます。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.ConductorPatch.DeclarationPriority.Sequentially">
+            <summary>
+            通常の優先度で宣言することを指定します。既になされた優先度 <see cref="F:BveEx.Extensions.ConductorPatch.DeclarationPriority.Sequentially"/> の宣言を上書きしますが、後に他の優先度 <see cref="F:BveEx.Extensions.ConductorPatch.DeclarationPriority.Sequentially"/> の宣言がなされた場合は上書きされます。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.ConductorPatch.DeclarationPriority.TopMost">
+            <summary>
+            最上級の優先度で宣言することを指定します。全ての他の宣言を無条件に上書きします。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.ConductorPatch.ConductorBase">
+            <summary>
+            車掌動作を上書きするための基本クラスを表します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.ConductorPatch.ConductorBase.Original">
+            <summary>
+            オリジナルの車掌動作が定義されている <see cref="T:BveTypes.ClassWrappers.Conductor"/> です。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.ConductorPatch.ConductorBase.FixStopPositionRequested">
+            <summary>
+            停止位置の修正を要求したことを通知します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.ConductorPatch.ConductorBase.StopPositionChecked">
+            <summary>
+            停止位置が良いことを確認したことを通知します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.ConductorPatch.ConductorBase.DoorOpening">
+            <summary>
+            ドアスイッチを開方向に扱ったことを通知します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.ConductorPatch.ConductorBase.DepartureSoundPlaying">
+            <summary>
+            発車ベルスイッチを扱ったこと、つまり停車場リストで定義した departureSound の再生を開始することを通知します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.ConductorPatch.ConductorBase.DoorClosing">
+            <summary>
+            ドアスイッチを閉方向に扱ったことを通知します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.ConductorPatch.ConductorBase.DoorClosed">
+            <summary>
+            車側灯の滅灯を確認したこと、つまり全てのドアが閉まりきったことを通知します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.ConductorPatch.ConductorBase.#ctor(BveTypes.ClassWrappers.Conductor)">
+            <summary>
+            <see cref="T:BveEx.Extensions.ConductorPatch.ConductorBase"/> クラスの新しいインスタンスを生成します。
+            </summary>
+            <param name="original">オリジナルの車掌動作が定義されている <see cref="T:BveTypes.ClassWrappers.Conductor"/>。</param>
+        </member>
+        <member name="M:BveEx.Extensions.ConductorPatch.ConductorBase.OnJumped(System.Int32,System.Boolean)">
+            <summary>
+            自列車がテレポートしたときに呼び出されます。
+            </summary>
+            <param name="nextStationIndex">ジャンプ先の距離程における次駅のインデックス。</param>
+            <param name="isDoorClosed">ドアが閉まっているかどうか。</param>
+            <returns>オリジナルの処理をオーバーライドする方法。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.ConductorPatch.ConductorBase.OnDoorStateChanged">
+            <summary>
+            ドアの状態が変更されたときに呼び出されます。
+            </summary>
+            <returns>オリジナルの処理をオーバーライドする方法。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.ConductorPatch.ConductorBase.OnTick">
+            <summary>
+            毎フレーム呼び出されます。
+            </summary>
+            <returns>オリジナルの処理をオーバーライドする方法。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.ConductorPatch.IConductorPatchFactory">
+            <summary>
+            <see cref="T:BveEx.Extensions.ConductorPatch.ConductorPatch"/> クラスの新しいインスタンスを初期化するたのファクトリを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.ConductorPatch.IConductorPatchFactory.BeginPatch(System.Func{BveTypes.ClassWrappers.Conductor,BveEx.Extensions.ConductorPatch.ConductorBase},BveEx.Extensions.ConductorPatch.DeclarationPriority,System.Action{BveEx.Extensions.ConductorPatch.ConductorPatch})">
+            <summary>
+            BVE 本体にて <see cref="T:BveTypes.ClassWrappers.Conductor"/> が初期化された時に車掌の動作を上書きするパッチを適用するよう登録します。
+            </summary>
+            <remarks>
+            <see cref="T:BveTypes.ClassWrappers.Conductor"/> が初期化されるのは <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> イベントより前です。
+            このメソッドを実行するタイミングによっては、パッチが適用されない場合もあるため注意してください。
+            </remarks>
+            <param name="conductorFactory">上書きする車掌の動作を定義した <see cref="T:BveEx.Extensions.ConductorPatch.ConductorBase"/> の派生クラスのインスタンスのファクトリデリゲート。</param>
+            <param name="priority">この宣言の優先度。</param>
+            <param name="patchedCallback">この宣言の優先度。</param>
+        </member>
+        <member name="M:BveEx.Extensions.ConductorPatch.IConductorPatchFactory.Patch(BveEx.Extensions.ConductorPatch.ConductorBase,BveEx.Extensions.ConductorPatch.DeclarationPriority)">
+            <summary>
+            車掌の動作を上書きするパッチを適用します。
+            </summary>
+            <param name="conductor">上書きする車掌の動作を定義した <see cref="T:BveEx.Extensions.ConductorPatch.ConductorBase"/> の派生クラスのインスタンス。</param>
+            <param name="priority">この宣言の優先度。</param>
+        </member>
+        <member name="M:BveEx.Extensions.ConductorPatch.IConductorPatchFactory.Unpatch(BveEx.Extensions.ConductorPatch.ConductorPatch)">
+            <summary>
+            指定したパッチを削除します。
+            </summary>
+            <param name="patch">削除するパッチ。</param>
+        </member>
+        <member name="T:BveEx.Extensions.ContextMenuHacker.ContextMenuItemType">
+            <summary>
+            右クリックメニューの項目の種類を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.ContextMenuHacker.ContextMenuItemType.CoreAndExtensions">
+            <summary>
+            BveEX 本体、または拡張機能によるものであることを指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.ContextMenuHacker.ContextMenuItemType.Plugins">
+            <summary>
+            プラグイン (拡張機能を除く) によるものであることを指定します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.ContextMenuHacker.IContextMenuHacker">
+            <summary>
+            メインフォームの右クリックメニューを編集するための機能を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.ContextMenuHacker.IContextMenuHacker.AddItem(System.Windows.Forms.ToolStripItem,BveEx.Extensions.ContextMenuHacker.ContextMenuItemType)">
+            <summary>
+            メニューに新しい項目を追加します。
+            </summary>
+            <param name="item">追加する項目。</param>
+            <param name="itemType">項目の種類。</param>
+            <returns>追加した項目。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.ContextMenuHacker.IContextMenuHacker.AddClickableMenuItem(System.String,System.EventHandler,BveEx.Extensions.ContextMenuHacker.ContextMenuItemType)">
+            <summary>
+            メニューに新しいクリック可能な <see cref="T:System.Windows.Forms.ToolStripMenuItem"/> を追加します。
+            </summary>
+            <param name="text">メニュー項目に表示するテキスト。</param>
+            <param name="click">メニュー項目がクリックされたときに発生する <see cref="T:System.EventHandler"/>。</param>
+            <param name="itemType">項目の種類。</param>
+            <returns>追加した項目。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.ContextMenuHacker.IContextMenuHacker.AddCheckableMenuItem(System.String,System.EventHandler,BveEx.Extensions.ContextMenuHacker.ContextMenuItemType)">
+            <summary>
+            メニューに新しいチェック可能な <see cref="T:System.Windows.Forms.ToolStripMenuItem"/> を追加します。
+            </summary>
+            <param name="text">メニュー項目に表示するテキスト。</param>
+            <param name="checkedChanged"><see cref="P:System.Windows.Forms.ToolStripMenuItem.Checked"/> プロパティの値が変化したときに発生する <see cref="T:System.EventHandler"/>。</param>
+            <param name="itemType">項目の種類。</param>
+            <returns>追加した項目。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.ContextMenuHacker.IContextMenuHacker.AddCheckableMenuItem(System.String,BveEx.Extensions.ContextMenuHacker.ContextMenuItemType)">
+            <summary>
+            メニューに新しいチェック可能な <see cref="T:System.Windows.Forms.ToolStripMenuItem"/> を追加します。
+            </summary>
+            <param name="text">メニュー項目に表示するテキスト。</param>
+            <param name="itemType">項目の種類。</param>
+            <returns>追加した項目。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.ContextMenuHacker.IContextMenuHacker.AddSeparator(BveEx.Extensions.ContextMenuHacker.ContextMenuItemType)">
+            <summary>
+            メニューに新しい区切り線を表す <see cref="T:System.Windows.Forms.ToolStripSeparator"/> を追加します。
+            </summary>
+            <param name="itemType">項目の種類。</param>
+            <returns>追加した項目。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.DiagramUpdater.IDiagramUpdater">
+            <summary>
+            時刻表、ダイヤグラムなどの行路に関わるオブジェクトの更新機能を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.DiagramUpdater.IDiagramUpdater.UpdateDiagram(BveTypes.ClassWrappers.Scenario)">
+            <summary>
+            更新に使用する <see cref="T:BveTypes.ClassWrappers.Scenario"/> を明示的に指定して、時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
+            </summary>
+            <remarks>
+            <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> イベント内で呼び出す場合など、<see cref="P:BveEx.PluginHost.IBveHacker.Scenario"/> が利用できない場合にこのオーバーロードを使用してください。
+            通常は <see cref="M:BveEx.Extensions.DiagramUpdater.IDiagramUpdater.UpdateDiagram"/> オーバーロードを使用してください。
+            </remarks>
+            <seealso cref="M:BveEx.Extensions.DiagramUpdater.IDiagramUpdater.UpdateDiagram"/>
+            <param name="scenario">更新に使用する <see cref="T:BveTypes.ClassWrappers.Scenario"/>。</param>
+        </member>
+        <member name="M:BveEx.Extensions.DiagramUpdater.IDiagramUpdater.UpdateDiagram">
+            <summary>
+            <see cref="P:BveEx.PluginHost.IBveHacker.Scenario"/> を使用して、時刻表と「時刻と位置」フォーム内のダイヤグラムの表示を最新の設定に更新します。
+            </summary>
+            <remarks>
+            <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> イベント内で呼び出す場合など、
+            <see cref="P:BveEx.PluginHost.IBveHacker.Scenario"/> が利用できない場合は <see cref="M:BveEx.Extensions.DiagramUpdater.IDiagramUpdater.UpdateDiagram(BveTypes.ClassWrappers.Scenario)"/> オーバーロードを使用してください。
+            </remarks>
+            <seealso cref="M:BveEx.Extensions.DiagramUpdater.IDiagramUpdater.UpdateDiagram(BveTypes.ClassWrappers.Scenario)"/>
+        </member>
+        <member name="T:BveEx.Extensions.LoadErrorManager.ILoadErrorManager">
+            <summary>
+            シナリオ読込時のエラーを編集するための機能を提供します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.LoadErrorManager.ILoadErrorManager.Errors">
+            <summary>
+            エラーの一覧を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.ILoadErrorManager.Throw(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            エラーをスローします。
+            </summary>
+            <param name="text">エラーの内容を表すテキスト。</param>
+            <param name="senderFileName">エラーの発生元となるファイルのファイル名。</param>
+            <param name="lineIndex">エラーの発生元となる行番号。</param>
+            <param name="charIndex">エラーの発生元となる列番号。</param>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.ILoadErrorManager.Throw(System.String,System.String,System.Int32)">
+            <summary>
+            エラーをスローします。
+            </summary>
+            <param name="text">エラーの内容を表すテキスト。</param>
+            <param name="senderFileName">エラーの発生元となるファイルのファイル名。</param>
+            <param name="lineIndex">エラーの発生元となる行番号。</param>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.ILoadErrorManager.Throw(System.String,System.String)">
+            <summary>
+            エラーをスローします。
+            </summary>
+            <param name="text">エラーの内容を表すテキスト。</param>
+            <param name="senderFileName">エラーの発生元となるファイルのファイル名。</param>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.ILoadErrorManager.Throw(System.String)">
+            <summary>
+            エラーをスローします。
+            </summary>
+            <param name="text">エラーの内容を表すテキスト。</param>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.ILoadErrorManager.Throw(BveTypes.ClassWrappers.LoadError)">
+            <summary>
+            エラーをスローします。
+            </summary>
+            <param name="error">スローするエラー。</param>
+        </member>
+        <member name="T:BveEx.Extensions.LoadErrorManager.LoadErrorList">
+            <summary>
+            <see cref="T:BveTypes.ClassWrappers.LoadError"/> のリストを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.LoadErrorManager.LoadErrorList.Item(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="P:BveEx.Extensions.LoadErrorManager.LoadErrorList.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:BveEx.Extensions.LoadErrorManager.LoadErrorList.IsReadOnly">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.Add(BveTypes.ClassWrappers.LoadError)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.Clear">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.Contains(BveTypes.ClassWrappers.LoadError)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.CopyTo(BveTypes.ClassWrappers.LoadError[],System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.IndexOf(BveTypes.ClassWrappers.LoadError)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.Insert(System.Int32,BveTypes.ClassWrappers.LoadError)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.Remove(BveTypes.ClassWrappers.LoadError)">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.LoadErrorManager.LoadErrorList.RemoveAt(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:BveEx.Extensions.MapStatements.ClauseFilter">
+            <summary>
+            マップステートメントの句を検索する際の絞り込み条件を表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.ClauseFilter.Name">
+            <summary>
+            検索する句の名前を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.ClauseFilter.Type">
+            <summary>
+            検索する句の種類を取得します。
+            </summary>
+            <remarks>
+            種類を限定しない場合は <see langword="null"/> を指定します。
+            </remarks>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.ClauseFilter.KeyCount">
+            <summary>
+            句のキーの長さの条件を取得します。
+            </summary>
+            <remarks>
+            キーの長さがこの配列のいずれかの要素に一致することを要求します。
+            <see cref="P:BveEx.Extensions.MapStatements.ClauseFilter.Name"/>、<see cref="P:BveEx.Extensions.MapStatements.ClauseFilter.Type"/> には合致するが、この条件に合致しない句に対して <see cref="M:BveEx.Extensions.MapStatements.ClauseFilter.Matches(BveTypes.ClassWrappers.MapStatementClause)"/> メソッドを呼び出すと、<see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> をスローします。<br/>
+            長さを限定しない場合は <see langword="null"/> を指定します。
+            </remarks>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.ClauseFilter.ArgCount">
+            <summary>
+            句の引数の長さの条件を取得します。
+            </summary>
+            <remarks>
+            引数の長さがこの配列のいずれかの要素に一致することを要求します。
+            <see cref="P:BveEx.Extensions.MapStatements.ClauseFilter.Name"/>、<see cref="P:BveEx.Extensions.MapStatements.ClauseFilter.Type"/> には合致するが、この条件に合致しない句に対して <see cref="M:BveEx.Extensions.MapStatements.ClauseFilter.Matches(BveTypes.ClassWrappers.MapStatementClause)"/> メソッドを呼び出すと、<see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> をスローします。<br/>
+            <see cref="P:BveEx.Extensions.MapStatements.ClauseFilter.Type"/> が <see cref="F:BveEx.Extensions.MapStatements.ClauseType.Function"/> である場合は、例外的に引数が <see langword="null"/> 1 個のみである関数に対しても要素「0」が一致します。<br/>
+            長さを限定しない場合は <see langword="null"/> を指定します。
+            </remarks>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.ClauseFilter.Element(System.String,System.Int32[])">
+            <summary>
+            マップ要素を表す <see cref="T:BveEx.Extensions.MapStatements.ClauseFilter"/> 構造体の新しいインスタンスを初期化します。
+            </summary>
+            <param name="name">検索する句の名前。</param>
+            <param name="keyCount">
+            マップ要素のキーの長さの条件。キーの長さがこの配列のいずれかの要素に一致することを要求します。
+            <paramref name="name"/> には合致するが、この条件に合致しない句に対して <see cref="M:BveEx.Extensions.MapStatements.ClauseFilter.Matches(BveTypes.ClassWrappers.MapStatementClause)"/> メソッドを呼び出すと、<see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> をスローします。
+            長さを限定しない場合は <see langword="null"/> を指定してください。
+            </param>
+            <returns>マップ要素を表す <see cref="T:BveEx.Extensions.MapStatements.ClauseFilter"/>。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.ClauseFilter.Function(System.String,System.Int32[])">
+            <summary>
+            関数を表す <see cref="T:BveEx.Extensions.MapStatements.ClauseFilter"/> 構造体の新しいインスタンスを初期化します。
+            </summary>
+            <param name="name">検索する句の名前。</param>
+            <param name="argCount">
+            関数の引数の長さの条件。引数の長さがこの配列のいずれかの要素に一致することを要求します。
+            <paramref name="name"/> には合致するが、この条件に合致しない句に対して <see cref="M:BveEx.Extensions.MapStatements.ClauseFilter.Matches(BveTypes.ClassWrappers.MapStatementClause)"/> メソッドを呼び出すと、<see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> をスローします。
+            なお、引数が <see langword="null"/> 1 個のみである関数に対しては、要素「0」も一致します。
+            長さを限定しない場合は <see langword="null"/> を指定してください。
+            </param>
+            <returns>マップ要素を表す <see cref="T:BveEx.Extensions.MapStatements.ClauseFilter"/>。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.ClauseFilter.#ctor(System.String,System.Nullable{BveEx.Extensions.MapStatements.ClauseType},System.Int32[],System.Int32[])">
+            <summary>
+            検索する句の種類、キー・引数の長さを指定して <see cref="T:BveEx.Extensions.MapStatements.ClauseFilter"/> 構造体の新しいインスタンスを初期化します。
+            </summary>
+            <param name="name">検索する句の名前。</param>
+            <param name="type">検索する句の種類。種類を限定しない場合は <see langword="null"/> を指定してください。</param>
+            <param name="keyCount">
+            句のキーの長さの条件。
+            <paramref name="name"/>、<paramref name="type"/> には合致するが、この条件に合致しない句に対して <see cref="M:BveEx.Extensions.MapStatements.ClauseFilter.Matches(BveTypes.ClassWrappers.MapStatementClause)"/> メソッドを呼び出すと、<see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> をスローします。
+            長さを限定しない場合は <see langword="null"/> を指定してください。
+            </param>
+            <param name="argCount">
+            句の引数の長さの条件。
+            <paramref name="name"/>、<paramref name="type"/> には合致するが、この条件に合致しない句に対して <see cref="M:BveEx.Extensions.MapStatements.ClauseFilter.Matches(BveTypes.ClassWrappers.MapStatementClause)"/> メソッドを呼び出すと、<see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> をスローします。
+            長さを限定しない場合は <see langword="null"/> を指定してください。
+            </param>
+            <remarks>
+            通常は <see cref="M:BveEx.Extensions.MapStatements.ClauseFilter.Element(System.String,System.Int32[])"/> または <see cref="M:BveEx.Extensions.MapStatements.ClauseFilter.Function(System.String,System.Int32[])"/> メソッドを使用してください。
+            </remarks>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.ClauseFilter.#ctor(System.String,System.Nullable{BveEx.Extensions.MapStatements.ClauseType})">
+            <summary>
+            検索する句の種類を指定して <see cref="T:BveEx.Extensions.MapStatements.ClauseFilter"/> 構造体の新しいインスタンスを初期化します。
+            </summary>
+            <param name="name">検索する句の名前。</param>
+            <param name="type">検索する句の種類。種類を限定しない場合は <see langword="null"/> を指定してください。</param>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.ClauseFilter.#ctor(System.String)">
+            <summary>
+            検索する句の種類を限定しない <see cref="T:BveEx.Extensions.MapStatements.ClauseFilter"/> 構造体の新しいインスタンスを初期化します。
+            </summary>
+            <param name="name">検索する句の名前。</param>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.ClauseFilter.Matches(BveTypes.ClassWrappers.MapStatementClause)">
+            <summary>
+            指定した句がこの条件を満たすかどうかを判定します。
+            </summary>
+            <param name="clause">この条件を満たすかどうかを判定する句。</param>
+            <returns><paramref name="clause"/> がこの条件を満たしている場合は <see langword="true"/>、満たしていない場合は <see langword="false"/>。</returns>
+            <exception cref="T:BveEx.Extensions.MapStatements.SyntaxException"><see cref="P:BveEx.Extensions.MapStatements.ClauseFilter.KeyCount"/>、<see cref="P:BveEx.Extensions.MapStatements.ClauseFilter.ArgCount"/> のいずれかの条件に合致しません。</exception>
+            <exception cref="T:System.NotSupportedException"><see cref="P:BveEx.Extensions.MapStatements.ClauseFilter.Type"/> がサポートされない値です。</exception>
+        </member>
+        <member name="T:BveEx.Extensions.MapStatements.ClauseType">
+            <summary>
+            マップステートメントの句の種類を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.MapStatements.ClauseType.Element">
+            <summary>
+            マップ要素。<c>Hoge['a'].Fuga.Piyo('b');</c> の Hoge、Fuga が該当します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.MapStatements.ClauseType.Function">
+            <summary>
+            関数。<c>Hoge['a'].Fuga.Piyo('b');</c> の Piyo が該当します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.MapStatements.Parsing.RawParserBase">
+            <summary>
+            追加文法を独自に定義し、それに則ってマップ構文を解析します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Parsing.RawParserBase.ConstructGrammar(Irony.Parsing.Grammar,BveEx.Extensions.MapStatements.Parsing.TerminalSet)">
+            <summary>
+            文法を定義します。
+            </summary>
+            <param name="grammar">マップ構文の文法。</param>
+            <param name="terminals">既定の文法にて定義されている代表的な <see cref="T:Irony.Parsing.BnfTerm"/> のセット。</param>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Parsing.RawParserBase.TryParseNode(BveTypes.ClassWrappers.MapParser,Irony.Parsing.ParseTreeNode)">
+            <summary>
+            式の解析を試行します。
+            </summary>
+            <param name="parser">構文解析器。</param>
+            <param name="node">解析対象となる式。</param>
+            <returns>
+            式の解析が完了したかどうか。<see langword="false"/> を返すと、他の構文解析器へ処理がフォールバックされます。
+            どの構文解析器でも解析ができなかった場合は、BVE の既定の解析処理を使用します。
+            </returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Parsing.RawParserBase.TryGetSystemVariable(BveTypes.ClassWrappers.MapParser,System.String,System.Object@)">
+            <summary>
+            システム変数の取得を試行します。
+            </summary>
+            <param name="parser">構文解析器。</param>
+            <param name="key">変数の名前。</param>
+            <param name="result">変数の値。</param>
+            <returns>
+            システム変数の取得が完了したかどうか。<see langword="false"/> を返すと、他の構文解析器へ処理がフォールバックされます。
+            どの構文解析器でも解析ができなかった場合は、BVE の既定の解析処理を使用します。
+            </returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Parsing.RawParserBase.TryCalculateSign(System.Object,System.String,System.Object@)">
+            <summary>
+            符号演算を試行します。
+            </summary>
+            <param name="value">演算前の値。</param>
+            <param name="operatorName">符号の名前。</param>
+            <param name="result">演算後の値。</param>
+            <returns>
+            符号演算が完了したかどうか。<see langword="false"/> を返すと、他の構文解析器へ処理がフォールバックされます。
+            どの構文解析器でも解析ができなかった場合は、BVE の既定の解析処理を使用します。
+            </returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Parsing.RawParserBase.TryCalculateOperator(System.Object,System.Object,System.String,System.Object@)">
+            <summary>
+            二項演算を試行します。
+            </summary>
+            <param name="left">左辺の値。</param>
+            <param name="right">右辺の値。</param>
+            <param name="operatorName">演算子の名前。</param>
+            <param name="result">演算後の値。</param>
+            <returns>
+            二項演算が完了したかどうか。<see langword="false"/> を返すと、他の構文解析器へ処理がフォールバックされます。
+            どの構文解析器でも解析ができなかった場合は、BVE の既定の解析処理を使用します。
+            </returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Parsing.RawParserBase.ToBool(System.Object)">
+            <summary>
+            <see cref="T:System.String"/> 型、<see cref="T:System.Double"/> 型、<see cref="T:System.Int32"/> 型のオブジェクトを真偽値に変換します。
+            </summary>
+            <param name="value">変換元のオブジェクト。</param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException"><paramref name="value"/> が <see cref="T:System.String"/> 型、<see cref="T:System.Double"/> 型、<see cref="T:System.Int32"/> 型以外です。</exception>
+        </member>
+        <member name="T:BveEx.Extensions.MapStatements.Parsing.TerminalSet">
+            <summary>
+            既定のマップ構文 文法にて定義されている、代表的な <see cref="T:Irony.Parsing.BnfTerm"/> のセットを表します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.MapStatements.IStatementSet">
+            <summary>
+            BveEX マップステートメントのセットを表します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.MapStatements.IStatementSet.StatementLoaded">
+            <summary>
+            BveEX マップステートメントが読み込まれた瞬間に発生します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.MapStatements.IStatementSet.LoadingCompleted">
+            <summary>
+            マップの読込が完了したときに発生します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.IStatementSet.RegisterParser(BveEx.Extensions.MapStatements.Parsing.RawParserBase)">
+            <summary>
+            独自の文法をサポートする構文解析器を登録します。
+            </summary>
+            <remarks>
+            独自の文法を追加すると、将来のアップデートで BVE 本体や BveEX 公式の文法と衝突する危険性があります。
+            この機能は可能な限り使わず、単純なマップステートメントを使用されることを強く推奨します。
+            </remarks>
+            <param name="parser">登録する構文解析器。</param>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.IStatementSet.FindOfficialStatement(BveEx.Extensions.MapStatements.ClauseFilter[])">
+            <summary>
+            指定された条件に一致する BveEX 公式のマップステートメントを検索し、その冒頭 1 つ目を取得します。
+            </summary>
+            <param name="clauses">検索するステートメントの句の一覧 (前方一致)。
+            「BveEx」マップ要素 (<c>BveEx.Hoge['a'].Fuga('b');</c> の BveEx) は除きます。</param>
+            <returns>条件に一致するステートメントの冒頭 1 つ目。見つからなかった場合は <see langword="null"/> を返します。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.IStatementSet.FindOfficialStatements(BveEx.Extensions.MapStatements.ClauseFilter[])">
+            <summary>
+            指定された条件に一致する BveEX 公式のマップステートメントを検索し、その一覧を取得します。
+            </summary>
+            <param name="clauses">検索するステートメントの句の一覧 (前方一致)。
+            「BveEx」マップ要素 (<c>BveEx.Hoge['a'].Fuga('b');</c> の BveEx) は除きます。</param>
+            <returns>条件に一致するステートメントの一覧。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.IStatementSet.FindUserStatement(System.String,BveEx.Extensions.MapStatements.ClauseFilter[])">
+            <summary>
+            指定された条件に一致する BveEX ユーザーマップステートメントを検索し、その冒頭 1 つ目を取得します。
+            </summary>
+            <param name="userName">ステートメントのユーザー名。<c>BveEx.User.FooBar.Hoge['a'].Fuga('b');</c> の FooBar が該当します。</param>
+            <param name="clauses">検索するステートメントの句の一覧 (前方一致)。
+            ユーザー名以前のマップ要素 (<c>BveEx.User.FooBar.Hoge['a'].Fuga('b');</c> の BveEx、User、FooBar) は除きます。</param>
+            <returns>条件に一致するステートメントの冒頭 1 つ目。見つからなかった場合は <see langword="null"/> を返します。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.IStatementSet.FindUserStatements(System.String,BveEx.Extensions.MapStatements.ClauseFilter[])">
+            <summary>
+            指定された条件に一致する BveEX ユーザーマップステートメントを検索し、その一覧を取得します。
+            </summary>
+            <param name="userName">ステートメントのユーザー名。<c>BveEx.User.FooBar.Hoge['a'].Fuga('b');</c> の FooBar が該当します。</param>
+            <param name="clauses">検索するステートメントの句の一覧 (前方一致)。
+            ユーザー名以前のマップ要素 (<c>BveEx.User.FooBar.Hoge['a'].Fuga('b');</c> の BveEx、User、FooBar) は除きます。</param>
+            <returns>条件に一致するステートメントの一覧。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.MapStatements.Statement">
+            <summary>
+            BveEX 由来のステートメント (マップ構文) を表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.Statement.Source">
+            <summary>
+            このステートメントのソースを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.Statement.OriginalSource">
+            <summary>
+            このステートメントのソースを、<c>ex_using</c> 句による補完を行う前の形で取得します。
+            </summary>
+            <remarks>
+            補完をしていない場合は <see cref="P:BveEx.Extensions.MapStatements.Statement.Source"/> と同じオブジェクトを返します。
+            </remarks>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Statement.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Statement.IsOfficialStatement(BveEx.Extensions.MapStatements.ClauseFilter[])">
+            <summary>
+            指定された条件に一致する BveEX 公式のマップステートメントであるかどうかを判定します。
+            </summary>
+            <param name="filters">ステートメントの句の一覧 (前方一致)。
+            「BveEx」マップ要素 (<c>BveEx.Hoge['a'].Fuga('b');</c> の BveEx) は除きます。</param>
+            <returns>条件に一致した場合は <see langword="true"/>、一致しなかった場合は <see langword="false"/>。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.Statement.IsUserStatement(System.String,BveEx.Extensions.MapStatements.ClauseFilter[])">
+            <summary>
+            指定された条件に一致する BveEX ユーザーマップステートメントであるかどうかを判定します。
+            </summary>
+            <param name="userName">ステートメントのユーザー名。<c>BveEx.User.FooBar.Hoge['a'].Fuga('b');</c> の FooBar が該当します。</param>
+            <param name="filters">ステートメントの句の一覧 (前方一致)。
+            ユーザー名以前のマップ要素 (<c>BveEx.User.FooBar.Hoge['a'].Fuga('b');</c> の BveEx、User、FooBar) は除きます。</param>
+            <returns>条件に一致した場合は <see langword="true"/>、一致しなかった場合は <see langword="false"/>。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.MapStatements.StatementLoadedEventArgs">
+            <summary>
+            <see cref="E:BveEx.Extensions.MapStatements.IStatementSet.StatementLoaded"/> イベントのデータを提供します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.StatementLoadedEventArgs.Statement">
+            <summary>
+            読み込まれた BveEX マップステートメント を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.StatementLoadedEventArgs.MapLoader">
+            <summary>
+            ステートメントの読込に使用された <see cref="T:BveTypes.ClassWrappers.MapLoader"/> を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.StatementLoadedEventArgs.#ctor(BveEx.Extensions.MapStatements.Statement,BveTypes.ClassWrappers.MapLoader)">
+            <summary>
+            <see cref="T:BveEx.Extensions.MapStatements.StatementLoadedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="statement">読み込まれた BveEX マップステートメント。</param>
+            <param name="mapLoader">ステートメントの読込に使用された <see cref="T:BveTypes.ClassWrappers.MapLoader"/>。</param>
+        </member>
+        <member name="T:BveEx.Extensions.MapStatements.SyntaxException">
+            <summary>
+            BveEX マップステートメントの文法エラーによる例外を表します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.MapStatements.SyntaxException.DefaultMessage">
+            <summary>
+            標準のエラーメッセージを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.MapStatements.SyntaxException.Statement">
+            <summary>
+            例外の原因となっているステートメントを取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.SyntaxException.#ctor(BveEx.Extensions.MapStatements.Statement,System.String)">
+            <summary>
+            <see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="statement">例外の原因となっているステートメント。</param>
+            <param name="message">例外の概要を表すメッセージ。</param>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.SyntaxException.#ctor(BveEx.Extensions.MapStatements.Statement,System.Exception)">
+            <summary>
+            内部例外が存在する <see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="statement">例外の原因となっているステートメント。</param>
+            <param name="innerException">内部例外。</param>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.SyntaxException.#ctor(BveEx.Extensions.MapStatements.Statement)">
+            <summary>
+            標準のエラーメッセージを使用して、<see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="statement">例外の原因となっているステートメント。</param>
+        </member>
+        <member name="M:BveEx.Extensions.MapStatements.SyntaxException.#ctor">
+            <summary>
+            原因となるステートメントを指定せずに、<see cref="T:BveEx.Extensions.MapStatements.SyntaxException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.MethodOverrideMode">
+            <summary>
+            メソッドの処理を上書きする方法を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.MethodOverrideMode.SkipOriginal">
+            <summary>
+            上書き定義した処理のみを実行し、オリジナルの処理をスキップすることを指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.MethodOverrideMode.RunOriginal">
+            <summary>
+            上書き定義した処理に続けて、オリジナルの処理も実行することを指定します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.Native.BeaconPassedEventArgs">
+            <summary>
+            <see cref="E:BveEx.Extensions.Native.INative.BeaconPassed"/> イベントのデータを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.BeaconPassedEventArgs.Type">
+            <summary>
+            地上子の種別を表す値を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.BeaconPassedEventArgs.SignalIndex">
+            <summary>
+            対となる閉塞の信号インデックスを取得します。
+            </summary>
+            <seealso cref="T:BveTypes.ClassWrappers.SectionManager"/>
+        </member>
+        <member name="P:BveEx.Extensions.Native.BeaconPassedEventArgs.Distance">
+            <summary>
+            対となる閉塞までの距離 [m] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.BeaconPassedEventArgs.Optional">
+            <summary>
+            地上子に設定された任意の値を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.BeaconPassedEventArgs.#ctor(System.Int32,System.Int32,System.Single,System.Int32)">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.BeaconPassedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="type">地上子の種別を表す値。</param>
+            <param name="signalIndex">対となる閉塞の信号インデックス。</param>
+            <param name="distance">対となる閉塞までの距離 [m]。</param>
+            <param name="optional">地上子に設定された任意の値。</param>
+        </member>
+        <member name="T:BveEx.Extensions.Native.HornBlownEventArgs">
+            <summary>
+            <see cref="E:BveEx.Extensions.Native.INative.HornBlown"/> イベントのデータを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.HornBlownEventArgs.HornType">
+            <summary>
+            警笛の種類を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.HornBlownEventArgs.#ctor(BveEx.PluginHost.Input.HornType)">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.HornBlownEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="hornType">警笛の種類。</param>
+        </member>
+        <member name="T:BveEx.Extensions.Native.INative">
+            <summary>
+            通常の ATS プラグインの互換機能を提供します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.INative.IsAvailable">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.INative"/> の各機能が現在使用可能かどうかを取得します。
+            </summary>
+            <remarks>
+            シナリオの実行中以外は使用できません。
+            </remarks>
+        </member>
+        <member name="P:BveEx.Extensions.Native.INative.AtsPanelArray">
+            <summary>
+            ATS プラグインによって制御可能な、運転台パネルの状態量 (例えば「ats12」など、subjectKey が「ats」から始まる状態量) の一覧を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.INative.AtsSoundArray">
+            <summary>
+            ATS サウンドの一覧を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.INative.AtsKeys">
+            <summary>
+            BVE が ATS プラグイン向けに提供するキーの入力情報を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.INative.VehicleSpec">
+            <summary>
+            BVE が ATS プラグイン向けに提供する車両の性能に関する情報を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.INative.VehicleState">
+            <summary>
+            BVE が ATS プラグイン向けに提供する車両の状態に関する情報を取得します。
+            このプロパティの値はフレーム毎に更新されます。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.Opened">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.INative"/> の各機能が使用可能になったときに呼び出されます。
+            </summary>
+            <remarks>
+            <see cref="T:BveTypes.ClassWrappers.AtsPlugin"/> のコンストラクタを実行した直後に呼び出されます。
+            </remarks>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.Closed">
+            <summary>
+            シナリオが終了され、<see cref="T:BveEx.Extensions.Native.INative"/> の各機能が使用不可能になる直前に呼び出されます。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.VehicleSpecLoaded">
+            <summary>
+            <see cref="P:BveEx.Extensions.Native.INative.VehicleSpec"/> プロパティへ値が設定された時に呼び出されます。
+            </summary>
+            <remarks>
+            通常の ATS プラグインの SetVehicleSpec(ATS_VEHICLESPEC vehicleSpec) 関数に相当します。
+            </remarks>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.Started">
+            <summary>
+            シナリオ開始時に呼び出されます。
+            </summary>
+            <remarks>
+            通常の ATS プラグインの Initialize(int brake) 関数に相当します。
+            </remarks>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.HornBlown">
+            <summary>
+            警笛が吹鳴された時に呼び出されます。
+            </summary>
+            <remarks>
+            通常の ATS プラグインの HornBlow(int hornType) 関数に相当します。
+            </remarks>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.DoorOpened">
+            <summary>
+            客室ドアが開いた時に呼び出されます。
+            </summary>
+            <remarks>
+            通常の ATS プラグインの DoorOpen() 関数に相当します。
+            </remarks>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.DoorClosed">
+            <summary>
+            客室ドアが閉まった時に呼び出されます。
+            </summary>
+            <remarks>
+            通常の ATS プラグインの DoorClose() 関数に相当します。
+            </remarks>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.SignalUpdated">
+            <summary>
+            現在の閉そくの信号インデックスが変化した時に呼び出されます。
+            </summary>
+            <remarks>
+            通常の ATS プラグインの SetSignal(int signal) 関数に相当します。
+            </remarks>
+        </member>
+        <member name="E:BveEx.Extensions.Native.INative.BeaconPassed">
+            <summary>
+            地上子上を通過した時に呼び出されます。
+            </summary>
+            <remarks>
+            通常の ATS プラグインの SendBeaconData(ATS_BEACONDATA beaconData) 関数に相当します。
+            </remarks>
+        </member>
+        <member name="T:BveEx.Extensions.Native.Input.AtsKeySet">
+            <summary>
+            ATS キーのセットを表します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.Native.Input.AtsKeySet.AnyKeyPressed">
+            <summary>
+            いずれかのキーが押された瞬間に発生します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.Native.Input.AtsKeySet.AnyKeyReleased">
+            <summary>
+            いずれかのキーが離された瞬間に発生します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.Input.AtsKeySet.GetKey(BveEx.PluginHost.Input.AtsKeyName)">
+            <summary>
+            指定した種類のキーを取得します。
+            </summary>
+            <param name="keyName">ATS キーの種類。</param>
+            <returns>種類 <paramref name="keyName"/> の ATS キー。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.Native.Input.AtsKey">
+            <summary>
+            すべてのキーの基本クラスを表します。
+            このクラスはスレッド セーフです。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.Input.AtsKey.IsPressed">
+            <summary>
+            キーが押されているかを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.Input.AtsKey.SincePressedMilliseconds">
+            <summary>
+            キーが押されてから経過した時間 [ms] を取得します。
+            キーが押されていない場合は 0 を返します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.Input.AtsKey.SincePressed">
+            <summary>
+            キーが押されてから経過した時間を取得します。
+            キーが押されていない場合は <see cref="F:System.TimeSpan.Zero"/> を返します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.Native.Input.AtsKey.Pressed">
+            <summary>
+            キーが押された瞬間に発生します。
+            </summary>
+        </member>
+        <member name="E:BveEx.Extensions.Native.Input.AtsKey.PreviewReleased">
+            <summary>
+            キーが離され、<see cref="P:BveEx.Extensions.Native.Input.AtsKey.IsPressed"/> に <see langword="false"/> が設定される直前に発生します。
+            </summary>
+            <remarks>
+            このイベントが発生した時点で経過時間を取得するための <see cref="T:System.Diagnostics.Stopwatch"/> は停止しているため、<br/>
+            <see cref="P:BveEx.Extensions.Native.Input.AtsKey.SincePressedMilliseconds"/> プロパティ、<see cref="P:BveEx.Extensions.Native.Input.AtsKey.SincePressed"/> プロパティから取得できる値は常に不変です。
+            </remarks>
+            <seealso cref="E:BveEx.Extensions.Native.Input.AtsKey.Released"/>
+        </member>
+        <member name="E:BveEx.Extensions.Native.Input.AtsKey.Released">
+            <summary>
+            キーが離された瞬間に発生します。
+            </summary>
+            <remarks>
+            キーが押されてから離されるまでに経過した時間を取得するには、<see cref="E:BveEx.Extensions.Native.Input.AtsKey.PreviewReleased"/> イベントを使用してください。
+            </remarks>
+            <seealso cref="E:BveEx.Extensions.Native.Input.AtsKey.PreviewReleased"/>
+        </member>
+        <member name="M:BveEx.Extensions.Native.Input.AtsKey.#ctor">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.Input.AtsKey"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.Input.AtsKey.LockAndInvoke(System.Action)">
+            <summary>
+            この <see cref="T:BveEx.Extensions.Native.Input.AtsKey"/> オブジェクトに対するロックを取得し、指定したデリゲートを実行します。
+            </summary>
+            <param name="action">実行するデリゲート。</param>
+        </member>
+        <member name="T:BveEx.Extensions.Native.Input.AtsKeyEventArgs">
+            <summary>
+            <see cref="E:BveEx.Extensions.Native.Input.AtsKeySet.AnyKeyPressed"/>、<see cref="E:BveEx.Extensions.Native.Input.AtsKeySet.AnyKeyReleased"/> イベントのデータを提供します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.Input.AtsKeyEventArgs.KeyName">
+            <summary>
+            イベントの発生元であるキーの名前を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.Input.AtsKeyEventArgs.Key">
+            <summary>
+            イベントの発生元であるキーを取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.Input.AtsKeyEventArgs.#ctor(BveEx.PluginHost.Input.AtsKeyName,BveEx.Extensions.Native.Input.AtsKey)">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.Input.AtsKeyEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="keyName">イベントの発生元であるキーの名前。</param>
+            <param name="key">イベントの発生元であるキー。</param>
+        </member>
+        <member name="T:BveEx.Extensions.Native.SignalUpdatedEventArgs">
+            <summary>
+            <see cref="E:BveEx.Extensions.Native.INative.SignalUpdated"/> イベントのデータを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.SignalUpdatedEventArgs.SignalIndex">
+            <summary>
+            信号インデックスを取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.SignalUpdatedEventArgs.#ctor(System.Int32)">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.SignalUpdatedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="signalIndex">信号インデックス。</param>
+        </member>
+        <member name="T:BveEx.Extensions.Native.SoundPlayCommands">
+            <summary>
+            ATS サウンドの再生コマンドに関する変換機能を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.SoundPlayCommands.ToCommand(BveEx.Extensions.Native.SoundPlayMode)">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.SoundPlayMode"/> を再生コマンドに変換します。
+            </summary>
+            <param name="mode">変換元となる再生モード。</param>
+            <returns>変換後のコマンド値。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.Native.SoundPlayCommands.PlayLooping(System.Int32)">
+            <summary>
+            音量を指定して、ループ再生を指示するための再生コマンドを作成します。
+            </summary>
+            <param name="volume">下げる音量の符号付き大きさ [B]。0 または負の値で指定してください。</param>
+            <returns>作成されたコマンド値。</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="volume"/> が 0 より大きいです。</exception>
+        </member>
+        <member name="M:BveEx.Extensions.Native.SoundPlayCommands.GetMode(System.Int32)">
+            <summary>
+            再生コマンドの整数値から、再生モードを取得します。
+            </summary>
+            <param name="command">コマンド値。</param>
+            <returns><paramref name="command"/> の再生モード。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.Native.SoundPlayMode">
+            <summary>
+            ATS サウンドの再生モードを指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.Native.SoundPlayMode.Stop">
+            <summary>
+            サウンドの再生を停止することを指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.Native.SoundPlayMode.PlayLooping">
+            <summary>
+            サウンドをループ再生することを指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.Native.SoundPlayMode.Play">
+            <summary>
+            サウンドを 1 回再生することを指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.Extensions.Native.SoundPlayMode.Continue">
+            <summary>
+            前フレームでの再生モードを維持することを指定します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.Native.StartedEventArgs">
+            <summary>
+            <see cref="E:BveEx.Extensions.Native.INative.Started"/> イベントのデータを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.StartedEventArgs.DefaultBrakePosition">
+            <summary>
+            ブレーキハンドルの初期位置を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.StartedEventArgs.#ctor(BveTypes.ClassWrappers.BrakePosition)">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.StartedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="defaultBrakePosition">ブレーキハンドルの初期位置。</param>
+        </member>
+        <member name="T:BveEx.Extensions.Native.VehicleSpec">
+            <summary>
+            車両諸元情報を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.VehicleSpec.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.VehicleSpec"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="brakeNotches">ブレーキノッチ数。</param>
+            <param name="powerNotches">力行ノッチ数。</param>
+            <param name="atsNotch">ATS 確認ノッチ。</param>
+            <param name="b67notch">ブレーキ弁 67 度に相当するノッチ。</param>
+            <param name="cars">編成両数。</param>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleSpec.BrakeNotches">
+            <summary>
+            ブレーキノッチ数を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleSpec.PowerNotches">
+            <summary>
+            力行ノッチ数を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleSpec.AtsNotch">
+            <summary>
+            ATS 確認ノッチを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleSpec.B67Notch">
+            <summary>
+            ブレーキ弁 67 度に相当するノッチを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleSpec.Cars">
+            <summary>
+            編成両数を取得します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.Native.VehicleState">
+            <summary>
+            車両の状態量を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.Native.VehicleState.#ctor(System.Double,System.Single,System.TimeSpan,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            <see cref="T:BveEx.Extensions.Native.VehicleState"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="location">列車位置 [m]。</param>
+            <param name="speed">列車速度 [km/h]。</param>
+            <param name="time">現在時刻。</param>
+            <param name="bcPressure">ブレーキシリンダ圧力 [kPa]。</param>
+            <param name="mrPressure">元空気ダメ圧力 [kPa]。</param>
+            <param name="erPressure">釣り合い空気ダメ圧力 [kPa]。</param>
+            <param name="bpPressure">釣り合い空気ダメ圧力 [kPa]。</param>
+            <param name="sapPressure">直通管圧力 [kPa]。</param>
+            <param name="current">電流 [A]。</param>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.Location">
+            <summary>
+            列車位置 [m] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.Speed">
+            <summary>
+            列車速度 [km/h] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.Time">
+            <summary>
+            現在時刻を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.BcPressure">
+            <summary>
+            ブレーキシリンダ圧力 [kPa] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.MrPressure">
+            <summary>
+            元空気ダメ圧力 [kPa] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.ErPressure">
+            <summary>
+            釣り合い空気ダメ圧力 [kPa] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.BpPressure">
+            <summary>
+            ブレーキ管圧力 [kPa] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.SapPressure">
+            <summary>
+            直通管圧力 [kPa] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.Native.VehicleState.Current">
+            <summary>
+            電流 [A] を取得します。
+            </summary>
+        </member>
+        <member name="T:BveEx.Extensions.PreTrainPatch.IPreTrainLocationConverter">
+            <summary>
+            先行列車の走行位置の変換機能を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.PreTrainPatch.IPreTrainLocationConverter.Convert(BveEx.Extensions.PreTrainPatch.PreTrainLocation)">
+            <summary>
+            先行列車の走行位置を変換します。
+            </summary>
+            <param name="source">変換元の <see cref="T:BveEx.Extensions.PreTrainPatch.PreTrainLocation"/>。</param>
+            <returns>変換結果の <see cref="T:BveEx.Extensions.PreTrainPatch.PreTrainLocation"/>。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.PreTrainPatch.IPreTrainPatchFactory">
+            <summary>
+            <see cref="T:BveEx.Extensions.PreTrainPatch.PreTrainPatch"/> クラスの新しいインスタンスを初期化するたのファクトリを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.PreTrainPatch.IPreTrainPatchFactory.Patch(System.String,BveTypes.ClassWrappers.SectionManager,BveEx.Extensions.PreTrainPatch.IPreTrainLocationConverter)">
+            <summary>
+            先行列車の走行位置を自由に変更できるようにするパッチを適用します。
+            </summary>
+            <param name="name">パッチの名前。</param>
+            <param name="sectionManager">先行列車の走行位置の変更に使用する <see cref="T:BveTypes.ClassWrappers.SectionManager"/>。</param>
+            <param name="converter">本来の走行位置から、実際に使用する走行位置に変換するためのコンバーター。</param>
+            <returns>パッチを表す <see cref="T:BveEx.Extensions.PreTrainPatch.PreTrainPatch"/>。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.PreTrainPatch.PreTrainLocation">
+            <summary>
+            先行列車の走行位置を表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.PreTrainPatch.PreTrainLocation.Location">
+            <summary>
+            距離程 [m] を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.PreTrainPatch.PreTrainLocation.SectionIndex">
+            <summary>
+            閉塞のインデックスを取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.PreTrainPatch.PreTrainLocation.#ctor(System.Double,System.Int32)">
+            <summary>
+            <see cref="T:BveEx.Extensions.PreTrainPatch.PreTrainLocation"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="location">距離程 [m]。</param>
+            <param name="sectionIndex">閉塞のインデックス。</param>
+        </member>
+        <member name="M:BveEx.Extensions.PreTrainPatch.PreTrainLocation.FromLocation(System.Double,BveTypes.ClassWrappers.SectionManager)">
+            <summary>
+            距離程から走行位置の閉塞を特定し、<see cref="T:BveEx.Extensions.PreTrainPatch.PreTrainLocation"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="location">距離程 [m]。この値は走行位置の閉塞の特定に使用されます。</param>
+            <param name="sectionManager">走行位置の閉塞を計算するのに用いる <see cref="T:BveTypes.ClassWrappers.SectionManager"/>。</param>
+            <returns>生成した <see cref="T:BveEx.Extensions.PreTrainPatch.PreTrainLocation"/>。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.PreTrainPatch.PreTrainPatch">
+            <summary>
+            先行列車の走行位置を自由に変更できるようにするパッチを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.PreTrainPatch.PreTrainPatch.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:BveEx.Extensions.SignalPatch.ISignalPatchFactory">
+            <summary>
+            <see cref="T:BveEx.Extensions.SignalPatch.SignalPatch"/> クラスの新しいインスタンスを初期化するたのファクトリを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.SignalPatch.ISignalPatchFactory.Patch(System.String,BveTypes.ClassWrappers.Section,System.Converter{System.Int32,System.Int32})">
+            <summary>
+            指定した閉塞へ、信号現示を自由に変更できるようにするパッチを適用します。
+            </summary>
+            <param name="name">パッチの名前。</param>
+            <param name="target">パッチを適用する閉塞。</param>
+            <param name="factory"><see cref="P:BveTypes.ClassWrappers.Section.CurrentSignalIndex"/> プロパティの処理をオーバーライドするデリゲート。<see langword="null"/> を返すと本来の値が使用されます。</param>
+            <returns>パッチを表す <see cref="T:BveEx.Extensions.SignalPatch.SignalPatch"/>。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.SignalPatch.SignalPatch">
+            <summary>
+            特定の閉塞の信号現示を自由に変更できるようにするパッチを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.SignalPatch.SignalPatch.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:BveEx.Extensions.SoundFactory.ISoundFactory">
+            <summary>
+            BVE で利用可能な音声を簡単に読み込むための機能を提供します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Extensions.SoundFactory.ISoundFactory.IsAvailable">
+            <summary>
+            <see cref="M:BveEx.Extensions.SoundFactory.ISoundFactory.LoadFrom(System.String,System.Double,BveTypes.ClassWrappers.Sound.SoundPosition,System.Int32)"/> メソッドが使用可能であるかどうかを取得します。
+            </summary>
+            <remarks>
+            <see cref="T:BveTypes.ClassWrappers.AtsPlugin"/> オブジェクトの生存期間 (コンストラクタが実行されてから、<see cref="M:BveTypes.ClassWrappers.AtsPlugin.Dispose"/> メソッドが呼び出されるまで) に一致します。
+            </remarks>
+        </member>
+        <member name="M:BveEx.Extensions.SoundFactory.ISoundFactory.LoadFrom(System.String,System.Double,BveTypes.ClassWrappers.Sound.SoundPosition,System.Int32)">
+            <summary>
+            音声ファイルを読み込んで <see cref="T:BveTypes.ClassWrappers.Sound"/> を生成します。
+            </summary>
+            <param name="path">音声ファイルのパス。</param>
+            <param name="minRadius">視点からの最小距離 [m]。この値は音量の計算に使用されます。</param>
+            <param name="position">音源が地上にあるか車上にあるか。</param>
+            <param name="bufferCount">この音声を同時に再生できる数。</param>
+            <returns>音声ファイルにより生成された <see cref="T:BveTypes.ClassWrappers.Sound"/>。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.StructureModelFinder.IStructureModelFinder">
+            <summary>
+            ストラクチャーの 3D モデルを簡単に検索するための機能を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.StructureModelFinder.IStructureModelFinder.GetModel(System.String)">
+            <summary>
+            ストラクチャーキーから 3D モデルを検索します。
+            </summary>
+            <param name="structureKey">ストラクチャーキー。</param>
+            <returns><paramref name="structureKey"/> に対応する 3D モデル。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.StructureModelFinder.IStructureModelFinder.GetStructureKey(BveTypes.ClassWrappers.Model)">
+            <summary>
+            3D モデルからストラクチャーキーを検索します。
+            </summary>
+            <param name="model">3D モデル。</param>
+            <returns><paramref name="model"/> に対応するストラクチャーキー。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.TrainDrawPatch.ITrainDrawPatchFactory">
+            <summary>
+            <see cref="T:BveEx.Extensions.TrainDrawPatch.TrainDrawPatch"/> クラスの新しいインスタンスを初期化するたのファクトリを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.TrainDrawPatch.ITrainDrawPatchFactory.Patch(System.String,BveTypes.ClassWrappers.Train,BveEx.Extensions.IMatrixConverter)">
+            <summary>
+            指定した他列車に、自由に移動・回転できるようにするパッチを適用します。
+            </summary>
+            <param name="name">パッチの名前。</param>
+            <param name="target">パッチを適用する他列車。</param>
+            <param name="worldMatrixConverter">本来の配置先に設置するワールド変換行列から、実際に使用する行列に変換するためのコンバーター。</param>
+            <returns>パッチを表す <see cref="T:BveEx.Extensions.TrainDrawPatch.TrainDrawPatch"/>。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.TrainDrawPatch.ITrainDrawPatchFactory.Patch(System.String,BveTypes.ClassWrappers.Train,BveEx.Extensions.IMatrixConverter,BveEx.Extensions.IMatrixConverter)">
+            <summary>
+            指定した他列車に、自由に移動・回転できるようにするパッチを適用します。
+            </summary>
+            <param name="name">パッチの名前。</param>
+            <param name="target">パッチを適用する他列車。</param>
+            <param name="worldMatrixConverter">本来の配置先に設置するワールド変換行列から、実際に使用する行列に変換するためのコンバーター。</param>
+            <param name="viewMatrixConverter">本来の配置先に設置するビュー変換行列から、実際に使用する行列に変換するためのコンバーター。</param>
+            <returns>パッチを表す <see cref="T:BveEx.Extensions.TrainDrawPatch.TrainDrawPatch"/>。</returns>
+        </member>
+        <member name="M:BveEx.Extensions.TrainDrawPatch.ITrainDrawPatchFactory.Patch(System.String,BveTypes.ClassWrappers.Train,System.Action{BveTypes.ClassWrappers.Direct3DProvider,SlimDX.Matrix})">
+            <summary>
+            指定した他列車に、自由に移動・回転できるようにするパッチを適用します。
+            </summary>
+            <param name="name">パッチの名前。</param>
+            <param name="target">パッチを適用する他列車。</param>
+            <param name="overrideAction"><see cref="M:BveTypes.ClassWrappers.Train.DrawCars(BveTypes.ClassWrappers.Direct3DProvider,SlimDX.Matrix)"/> メソッドの処理をオーバーライドするデリゲート。</param>
+            <returns>パッチを表す <see cref="T:BveEx.Extensions.TrainDrawPatch.TrainDrawPatch"/>。</returns>
+        </member>
+        <member name="T:BveEx.Extensions.TrainDrawPatch.TrainDrawPatch">
+            <summary>
+            他列車を自由に移動・回転できるようにするパッチを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.TrainDrawPatch.TrainDrawPatch.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:BveEx.Extensions.IMatrixConverter">
+            <summary>
+            行列の変換機能を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Extensions.IMatrixConverter.Convert(SlimDX.Matrix)">
+            <summary>
+            行列を変換します。
+            </summary>
+            <param name="source">変換元の行列。</param>
+            <returns>変換結果の行列。</returns>
+        </member>
+    </members>
+</doc>

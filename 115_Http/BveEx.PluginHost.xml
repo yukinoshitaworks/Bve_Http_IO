@@ -1,0 +1,1024 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BveEx.PluginHost</name>
+    </assembly>
+    <members>
+        <member name="P:BveEx.PluginHost.App.ProductName">
+            <summary>
+            プロダクト名を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.ProductShortName">
+            <summary>
+            短いプロダクト名を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.Process">
+            <summary>
+            制御対象の BVE を実行している <see cref="T:System.Diagnostics.Process"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.BveAssembly">
+            <summary>
+            実行元の BVE の <see cref="T:System.Reflection.Assembly"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.BveExLauncherAssembly">
+            <summary>
+            BveEX Launcher の <see cref="T:System.Reflection.Assembly"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.BveExAssembly">
+            <summary>
+            BveEX の <see cref="T:System.Reflection.Assembly"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.BveExPluginHostAssembly">
+            <summary>
+            BveEX プラグインホストの <see cref="T:System.Reflection.Assembly"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.ExtensionDirectory">
+            <summary>
+            BveEX 拡張機能の配置先として使用するディレクトリを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.BveExVersion">
+            <summary>
+            BveEX のバージョンを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.App.BveVersion">
+            <summary>
+            実行元の BVE のバージョンを取得します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.DictionaryExtensions">
+            <summary>
+            <see cref="T:System.Collections.Generic.IDictionary`2"/> の LINQ 操作機能を拡張します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.DictionaryExtensions.TryGetKey``2(System.Collections.Generic.IDictionary{``0,``1},``1,``0@,System.Collections.Generic.IEqualityComparer{``1})">
+            <summary>
+            指定した値に関連付けられているキーを取得します。
+            </summary>
+            <typeparam name="TKey"><paramref name="source"/> のキーの型。</typeparam>
+            <typeparam name="TValue"><paramref name="source"/> の値の型。</typeparam>
+            <param name="source">返されるキーが含まれる <see cref="T:System.Collections.Generic.IDictionary`2"/>。</param>
+            <param name="value">取得するキーの値。</param>
+            <param name="key">このメソッドから制御が戻るときに、値が見つかった場合は、指定した値に関連付けられているキーが格納されます。それ以外の場合は <typeparamref name="TKey"/> 型に対する既定の値。 このパラメーターは初期化せずに渡されます。</param>
+            <param name="comparer">値を比較する等値比較子。</param>
+            <returns>指定した値を持つ要素が <paramref name="source"/> に格納されている場合は <see langword="true"/>。それ以外の場合は <see langword="false"/>。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="source"/>、または <paramref name="comparer"/> が <see langword="null"/> です。</exception>
+        </member>
+        <member name="M:BveEx.PluginHost.DictionaryExtensions.TryGetKey``2(System.Collections.Generic.IDictionary{``0,``1},``1,``0@)">
+            <summary>
+            指定した値に関連付けられているキーを取得します。
+            </summary>
+            <typeparam name="TKey"><paramref name="source"/> のキーの型。</typeparam>
+            <typeparam name="TValue"><paramref name="source"/> の値の型。</typeparam>
+            <param name="source">返されるキーが含まれる <see cref="T:System.Collections.Generic.IDictionary`2"/>。</param>
+            <param name="value">取得するキーの値。</param>
+            <param name="key">このメソッドから制御が戻るときに、値が見つかった場合は、指定した値に関連付けられているキーが格納されます。それ以外の場合は <typeparamref name="TKey"/> 型に対する既定の値。このパラメーターは初期化せずに渡されます。</param>
+            <returns>指定した値を持つ要素が <paramref name="source"/> に格納されている場合は <see langword="true"/>。それ以外の場合は <see langword="false"/>。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="source"/> が <see langword="null"/> です。</exception>
+        </member>
+        <member name="M:BveEx.PluginHost.DictionaryExtensions.TryGetKey``2(System.Collections.Generic.IDictionary{``0,``1},``1,System.Collections.Generic.IEqualityComparer{``1})">
+            <summary>
+            指定した値に関連付けられているキーを取得します。
+            </summary>
+            <typeparam name="TKey"><paramref name="source"/> のキーの型。</typeparam>
+            <typeparam name="TValue"><paramref name="source"/> の値の型。</typeparam>
+            <param name="source">返されるキーが含まれる <see cref="T:System.Collections.Generic.IDictionary`2"/>。</param>
+            <param name="value">取得するキーの値。</param>
+            <param name="comparer">値を比較する等値比較子。</param>
+            <returns>値が見つかった場合は、指定した値に関連付けられているキーが格納されます。それ以外の場合は <typeparamref name="TKey"/> 型に対する既定の値。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="source"/>、または <paramref name="comparer"/> が <see langword="null"/> です。</exception>
+        </member>
+        <member name="M:BveEx.PluginHost.DictionaryExtensions.TryGetKey``2(System.Collections.Generic.IDictionary{``0,``1},``1)">
+            <summary>
+            指定した値に関連付けられているキーを取得します。
+            </summary>
+            <typeparam name="TKey"><paramref name="source"/> のキーの型。</typeparam>
+            <typeparam name="TValue"><paramref name="source"/> の値の型。</typeparam>
+            <param name="source">返されるキーが含まれる <see cref="T:System.Collections.Generic.IDictionary`2"/>。</param>
+            <param name="value">取得するキーの値。</param>
+            <returns>値が見つかった場合は、指定した値に関連付けられているキーが格納されます。それ以外の場合は <typeparamref name="TKey"/> 型に対する既定の値。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="source"/> が <see langword="null"/> です。</exception>
+        </member>
+        <member name="M:BveEx.PluginHost.DictionaryExtensions.ContainsValue``2(System.Collections.Generic.IDictionary{``0,``1},``1,System.Collections.Generic.IEqualityComparer{``1})">
+            <summary>
+            <see cref="T:System.Collections.Generic.IDictionary`2"/> に特定の値が格納されているかどうかを判断します。
+            </summary>
+            <typeparam name="TKey"><paramref name="source"/> のキーの型。</typeparam>
+            <typeparam name="TValue"><paramref name="source"/> の値の型。</typeparam>
+            <param name="source">返されるキーが含まれる <see cref="T:System.Collections.Generic.IDictionary`2"/>。</param>
+            <param name="value">取得するキーの値。</param>
+            <param name="comparer">値を比較する等値比較子。</param>
+            <returns>指定した値を持つ要素が <paramref name="source"/> に格納されている場合は <see langword="true"/>。それ以外の場合は <see langword="false"/>。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="source"/>、または <paramref name="comparer"/> が <see langword="null"/> です。</exception>
+        </member>
+        <member name="M:BveEx.PluginHost.DictionaryExtensions.ContainsValue``2(System.Collections.Generic.IDictionary{``0,``1},``1)">
+            <summary>
+            <see cref="T:System.Collections.Generic.IDictionary`2"/> に特定の値が格納されているかどうかを判断します。
+            </summary>
+            <typeparam name="TKey"><paramref name="source"/> のキーの型。</typeparam>
+            <typeparam name="TValue"><paramref name="source"/> の値の型。</typeparam>
+            <param name="source">返されるキーが含まれる <see cref="T:System.Collections.Generic.IDictionary`2"/>。</param>
+            <param name="value">取得するキーの値。</param>
+            <param name="comparer">値を比較する等値比較子。</param>
+            <returns>指定した値を持つ要素が <paramref name="source"/> に格納されている場合は <see langword="true"/>。それ以外の場合は <see langword="false"/>。</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="source"/> が <see langword="null"/> です。</exception>
+        </member>
+        <member name="T:BveEx.PluginHost.ScenarioOpenedEventArgs">
+            <summary>
+            <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioOpened"/> イベントのデータを提供します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.ScenarioOpenedEventArgs.ScenarioInfo">
+            <summary>
+            読込が開始されたシナリオの情報を格納する <see cref="T:BveTypes.ClassWrappers.ScenarioInfo"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.ScenarioOpenedEventArgs.IsReload">
+            <summary>
+            F5 キーなどによる再読込であるかどうかを取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.ScenarioOpenedEventArgs.#ctor(BveTypes.ClassWrappers.ScenarioInfo,System.Boolean)">
+            <summary>
+            <see cref="T:BveEx.PluginHost.ScenarioOpenedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="scenarioInfo">読込が開始されたシナリオの情報を格納する <see cref="T:BveTypes.ClassWrappers.ScenarioInfo"/>。</param>
+            <param name="isReload">F5 キーなどによる再読込であるかどうか。</param>
+        </member>
+        <member name="M:BveEx.PluginHost.ScenarioOpenedEventArgs.#ctor(BveTypes.ClassWrappers.ScenarioInfo)">
+            <summary>
+            再読込でないことを表す <see cref="T:BveEx.PluginHost.ScenarioOpenedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="scenarioInfo">読込が開始されたシナリオの情報を格納する <see cref="T:BveTypes.ClassWrappers.ScenarioInfo"/>。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.ConflictException">
+            <summary>
+            他のプラグインとの競合を検出した場合にスローされます。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.ConflictException.SenderName">
+            <summary>
+            <see cref="T:BveEx.PluginHost.ConflictException"/> の原因となった箇所を表すテキストを取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.ConflictException.#ctor(System.String)">
+            <summary>
+            例外を説明するメッセージを指定して、<see cref="T:BveEx.PluginHost.ConflictException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="message">例外がスローされたときに表示するメッセージ。</param>
+        </member>
+        <member name="M:BveEx.PluginHost.ConflictException.#ctor(System.String,System.String)">
+            <summary>
+            例外を説明するメッセージとこの例外の原因となった箇所を表すテキストを指定して、<see cref="T:BveEx.PluginHost.ConflictException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="message">例外がスローされたときに表示するメッセージ。<see langword="null"/> を指定すると既定のメッセージが使用されます。</param>
+            <param name="senderName"><see cref="T:BveEx.PluginHost.ConflictException"/> の原因となった箇所を表すテキスト。</param>
+        </member>
+        <member name="M:BveEx.PluginHost.ConflictException.#ctor(System.String,System.Exception)">
+            <summary>
+            例外を説明するメッセージとこの例外の原因となった例外を指定して、<see cref="T:BveEx.PluginHost.ConflictException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="message">例外がスローされたときに表示するメッセージ。</param>
+            <param name="innerException"><see cref="T:BveEx.PluginHost.ConflictException"/> の原因となった例外。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.MemberNotInitializedException">
+            <summary>
+            まだ初期化されておらず取得できないプロパティを取得しようとしたときにスローされる例外です。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.MemberNotInitializedException.#ctor(System.String)">
+            <summary>
+            メッセージを指定して、<see cref="T:BveEx.PluginHost.MemberNotInitializedException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="message">この例外の詳細を説明するメッセージ。</param>
+        </member>
+        <member name="M:BveEx.PluginHost.MemberNotInitializedException.#ctor">
+            <summary>
+            <see cref="T:BveEx.PluginHost.MemberNotInitializedException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Input.HornType">
+            <summary>
+            警笛の種類を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.HornType.Primary">
+            <summary>
+            警笛 1。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.HornType.Secondary">
+            <summary>
+            警笛 2。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.HornType.Music">
+            <summary>
+            ミュージックホーン。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Input.InputEventArgsFactory">
+            <summary>
+            <see cref="T:Mackoy.Bvets.InputEventArgs"/> を直感的に作成するための機能を提供します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.OneLeverNotch(System.Int32)">
+            <summary>
+            ワンハンドル式運転台のノッチを変更するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="notch">変更先のノッチ。マスコンの場合は正、ブレーキの場合は負の数で表します。</param>
+            <returns>ノッチを変更することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+            <seealso cref="M:BveEx.PluginHost.Input.InputEventArgsFactory.OneLeverPower(System.Int32)"/>
+            <seealso cref="M:BveEx.PluginHost.Input.InputEventArgsFactory.OneLeverBrake(System.Int32)"/>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.OneLeverPower(System.Int32)">
+            <summary>
+            ワンハンドル式運転台のマスコンノッチを変更するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="notch">変更先のノッチ。</param>
+            <returns>ノッチを変更することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.OneLeverBrake(System.Int32)">
+            <summary>
+            ワンハンドル式運転台のブレーキノッチを変更するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="notch">変更先のノッチ。</param>
+            <returns>ノッチを変更することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.OneLeverNeutral">
+            <summary>
+            ワンハンドル式運転台のノッチを N 位置へ変更するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <returns>ノッチを変更することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.TwoLeverPower(System.Int32)">
+            <summary>
+            ツーハンドル式運転台のマスコンノッチを変更するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="notch">変更先のノッチ。抑速ブレーキの場合は負の数で表します。</param>
+            <returns>ノッチを変更することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.TwoLeverBrake(System.Int32)">
+            <summary>
+            ツーハンドル式運転台のブレーキノッチを変更するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="notch">変更先のノッチ。</param>
+            <returns>ノッチを変更することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.Reverser(BveTypes.ClassWrappers.ReverserPosition)">
+            <summary>
+            レバーサー位置を変更するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="position">変更先のレバーサー位置。</param>
+            <returns>レバーサー位置を変更することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.Horn(BveEx.PluginHost.Input.HornType)">
+            <summary>
+            警笛を鳴らすための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="type">鳴らす警笛の種類。</param>
+            <returns>警笛を鳴らすことを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.ConstantSpeed">
+            <summary>
+            定速制御を有効化するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <returns>定速制御を有効化することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.AtsKey(BveEx.PluginHost.Input.AtsKeyName)">
+            <summary>
+            ATS キーを押下するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="key">押下するキー。</param>
+            <returns>ATS キーを押下することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.Input.InputEventArgsFactory.SystemKey(BveEx.PluginHost.Input.SystemKeyName)">
+            <summary>
+            システムキーを押下するための <see cref="T:Mackoy.Bvets.InputEventArgs"/> を作成します。
+            </summary>
+            <param name="key">押下するキー。</param>
+            <returns>システムキーを押下することを表す <see cref="T:Mackoy.Bvets.InputEventArgs"/>。</returns>
+        </member>
+        <member name="T:BveEx.PluginHost.Input.AtsKeyName">
+            <summary>
+            BVE が ATS プラグイン向けに提供する ATS キーの種類を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.S">
+            <summary>ATS S キー (既定: Space)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.A1">
+            <summary>ATS A1 キー (既定: Insert)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.A2">
+            <summary>ATS A2 キー (既定: Delete)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.B1">
+            <summary>ATS B1 キー (既定: Home)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.B2">
+            <summary>ATS B2 キー (既定: End)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.C1">
+            <summary>ATS C1 キー (既定: PageUp)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.C2">
+            <summary>ATS C2 キー (既定: PageDown)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.D">
+            <summary>ATS D キー (既定: D2)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.E">
+            <summary>ATS E キー (既定: D3)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.F">
+            <summary>ATS F キー (既定: D4)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.G">
+            <summary>ATS G キー (既定: D5)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.H">
+            <summary>ATS H キー (既定: D6)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.I">
+            <summary>ATS I キー (既定: D7)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.J">
+            <summary>ATS J キー (既定: D8)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.K">
+            <summary>ATS K キー (既定: D9)。</summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.AtsKeyName.L">
+            <summary>ATS L キー (既定: D0)。</summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Input.SystemKeyName">
+            <summary>
+            BVE のシステムキーの種類を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ViewUp">
+            <summary>
+            視点を上へ移動します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ViewDown">
+            <summary>
+            視点を下へ移動します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ViewLeft">
+            <summary>
+            視点を左へ移動します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ViewRight">
+            <summary>
+            視点を右へ移動します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ViewDefault">
+            <summary>
+            視点をデフォルトに戻します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ViewZoomIn">
+            <summary>
+            視点をズームインします。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ViewZoomOut">
+            <summary>
+            視点をズームアウトします。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ViewChange">
+            <summary>
+            視点を切り替えます。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.TimeTable">
+            <summary>
+            時刻表の表示 / 非表示を切り替えます。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.ReloadScenario">
+            <summary>
+            シナリオを再読み込みします。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.Stop">
+            <summary>
+            自列車をその場で停止させます。F7 キーに相当します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.FastForward">
+            <summary>
+            早送りの有効 / 無効を切り替えます。F8 キーに相当します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Input.SystemKeyName.Pause">
+            <summary>
+            ポーズの有効 / 無効を切り替えます。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.ITwoWayConverter`2">
+            <summary>
+            双方向に型変換が可能なコンバーターを表します。
+            </summary>
+            <typeparam name="T1">変換元・先として使用する 1 つ目の型。</typeparam>
+            <typeparam name="T2">変換元・先として使用する 2 つ目の型。</typeparam>
+        </member>
+        <member name="M:BveEx.PluginHost.ITwoWayConverter`2.Convert(`0)">
+            <summary>
+            <typeparamref name="T1"/> 型のオブジェクトを <typeparamref name="T2"/> 型に変換します。
+            </summary>
+            <param name="value">変換するオブジェクト。</param>
+            <returns>変換されたオブジェクト。</returns>
+        </member>
+        <member name="M:BveEx.PluginHost.ITwoWayConverter`2.ConvertBack(`1)">
+            <summary>
+            <typeparamref name="T2"/> 型のオブジェクトを <typeparamref name="T1"/> 型に変換します。
+            </summary>
+            <param name="value">変換するオブジェクト。</param>
+            <returns>変換されたオブジェクト。</returns>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.AllPluginsLoadedEventArgs">
+            <summary>
+            BveEX プラグインの読込完了を通知するイベントのデータを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.AllPluginsLoadedEventArgs.Plugins">
+            <summary>
+            読み込まれた BveEX プラグインの一覧を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.AllPluginsLoadedEventArgs.#ctor(BveEx.PluginHost.Plugins.IPluginSet)">
+            <summary>
+            <see cref="T:BveEx.PluginHost.Plugins.AllPluginsLoadedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="plugins">読み込まれた BveEX プラグインの一覧。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.AllPluginsLoadedEventHandler">
+            <summary>
+            BveEX プラグインの読込完了を通知するイベントを処理するメソッドを表します。
+            </summary>
+            <param name="e">イベントデータを格納している <see cref="T:BveEx.PluginHost.Plugins.AllPluginsLoadedEventArgs"/>。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.AssemblyPluginBase">
+            <summary>
+            アセンブリ (.dll) 形式の BveEX プラグインを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.AssemblyPluginBase.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.AssemblyPluginBase.Title">
+            <inheritdoc/>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.AssemblyPluginBase.Version">
+            <inheritdoc/>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.AssemblyPluginBase.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.AssemblyPluginBase.Copyright">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.AssemblyPluginBase.#ctor(BveEx.PluginHost.Plugins.PluginBuilder)">
+            <summary>
+            BveEX プラグインの新しいインスタンスを初期化します。
+            </summary>
+            <remarks>
+            <see cref="T:BveEx.PluginHost.Plugins.PluginAttribute"/> を付加して、プラグインの種類を指定してください。
+            </remarks>
+            <param name="builder">BveEX から渡される BVE、BveEX の情報。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.Extensions.AllExtensionsLoadedEventArgs">
+            <summary>
+            BveEX 拡張機能の読込完了を通知するイベントのデータを表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.Extensions.AllExtensionsLoadedEventArgs.Extensions">
+            <summary>
+            読み込まれた BveEX 拡張機能の一覧を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.Extensions.AllExtensionsLoadedEventArgs.#ctor(BveEx.PluginHost.Plugins.Extensions.IExtensionSet)">
+            <summary>
+            <see cref="T:BveEx.PluginHost.Plugins.Extensions.AllExtensionsLoadedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="extensions">読み込まれた BveEX 拡張機能の一覧。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.Extensions.AllExtensionsLoadedEventHandler">
+            <summary>
+            BveEX 拡張機能の読込完了を通知するイベントを処理するメソッドを表します。
+            </summary>
+            <param name="e">イベントデータを格納している <see cref="T:BveEx.PluginHost.Plugins.Extensions.AllExtensionsLoadedEventArgs"/>。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.Extensions.ITogglableExtension">
+            <summary>
+            バージョン情報ダイアログから有効・無効が切替可能な BveEX 拡張機能を表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.Extensions.ITogglableExtension.IsEnabled">
+            <summary>
+            この拡張機能が有効かどうかを取得・設定します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.Extensions.TogglableAttribute">
+            <summary>
+            バージョン情報ダイアログから有効・無効が切替可能な BveEX 拡張機能であることを指定します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.Extensions.TogglableAttribute.#ctor">
+            <summary>
+            <see cref="T:BveEx.PluginHost.Plugins.Extensions.TogglableAttribute"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.Extensions.ExtensionMainDisplayTypeAttribute">
+            <summary>
+            <see cref="M:BveEx.PluginHost.Plugins.Extensions.IExtensionSet.GetExtension``1"/> メソッドからこの BveEX 拡張機能のメインクラスを取得する時に使用する型を指定します。
+            </summary>
+            <seealso cref="T:BveEx.PluginHost.Plugins.Extensions.HideExtensionMainAttribute"/>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.Extensions.ExtensionMainDisplayTypeAttribute.DisplayType">
+            <summary>
+            <see cref="M:BveEx.PluginHost.Plugins.Extensions.IExtensionSet.GetExtension``1"/> メソッドからこの BveEX 拡張機能のメインクラスを取得する時に使用する型を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.Extensions.ExtensionMainDisplayTypeAttribute.#ctor(System.Type)">
+            <summary>
+            <see cref="T:BveEx.PluginHost.Plugins.Extensions.ExtensionMainDisplayTypeAttribute"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="displayType"><see cref="M:BveEx.PluginHost.Plugins.Extensions.IExtensionSet.GetExtension``1"/> メソッドからこの BveEX 拡張機能のメインクラスを取得する時に使用する型。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.Extensions.HideExtensionMainAttribute">
+            <summary>
+            <see cref="M:BveEx.PluginHost.Plugins.Extensions.IExtensionSet.GetExtension``1"/> メソッドからこの BveEX 拡張機能のメインクラスを取得できないように指定します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.Extensions.HideExtensionMainAttribute.#ctor">
+            <summary>
+            <see cref="T:BveEx.PluginHost.Plugins.Extensions.HideExtensionMainAttribute"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.Extensions.IExtension">
+            <summary>
+            BveEX 拡張機能を表します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.Extensions.IExtensionSet">
+            <summary>
+            BveEX 拡張機能の一覧を表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.Extensions.IExtensionSet.GetExtension``1">
+            <summary>
+            指定した型の BveEX 拡張機能を取得します。
+            </summary>
+            <typeparam name="TExtension">BveEX 拡張機能の型。</typeparam>
+            <returns><typeparamref name="TExtension"/> 型の BveEX 拡張機能。</returns>
+        </member>
+        <member name="E:BveEx.PluginHost.Plugins.Extensions.IExtensionSet.AllExtensionsLoaded">
+            <summary>
+            全ての BveEX 拡張機能が読み込まれ、<see cref="N:BveEx.PluginHost.Plugins.Extensions"/> プロパティが取得可能になると発生します。
+            </summary>
+            <remarks>
+            BveEX 拡張機能以外の BveEX プラグインの場合 (<see cref="P:BveEx.PluginHost.Plugins.PluginBase.PluginType"/> が <see cref="F:BveEx.PluginHost.Plugins.PluginType.Extension"/> 以外の場合)、<see cref="P:BveEx.PluginHost.Plugins.PluginBase.Extensions"/> プロパティは初めから取得可能です。
+            </remarks>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.IPluginSet">
+            <summary>
+            BveEX プラグインの一覧を表します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.IPluginSet.MapPlugins">
+            <summary>
+            マッププラグインの一覧を、キーが識別子、値がプラグインのインスタンスであるディクショナリとして取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.IPluginSet.VehiclePlugins">
+            <summary>
+            車両プラグインの一覧を、キーが識別子、値がプラグインのインスタンスであるディクショナリとして取得します。
+            </summary>
+        </member>
+        <member name="E:BveEx.PluginHost.Plugins.IPluginSet.AllPluginsLoaded">
+            <summary>
+            全ての BveEX プラグインが読み込まれ、<see cref="N:BveEx.PluginHost.Plugins"/> プロパティが取得可能になると発生します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.PluginAttribute">
+            <summary>
+            BveEX プラグインの仕様を指定します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginAttribute.PluginType">
+            <summary>
+            この BveEX プラグインの種類を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginAttribute.MinRequiredVersion">
+            <summary>
+            この BveEX プラグインが必要とする BveEX 本体の最低バージョンを取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.PluginAttribute.#ctor(BveEx.PluginHost.Plugins.PluginType,System.String)">
+            <summary>
+            <see cref="T:BveEx.PluginHost.Plugins.PluginAttribute"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="pluginType">BveEX プラグインの種類。</param>
+            <param name="minRequiredVersion">この BveEX プラグインが必要とする BveEX 本体の最低バージョンを表す文字列。
+            テキストは <see cref="T:System.Version"/> クラスのコンストラクタがサポートするフォーマットに則っている必要があります。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.PluginType">
+            <summary>
+            プラグインの種類を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Plugins.PluginType.Extension">
+            <summary>
+            拡張機能を表します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Plugins.PluginType.VehiclePlugin">
+            <summary>
+            車両プラグインを表します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Plugins.PluginType.MapPlugin">
+            <summary>
+            マッププラグインを表します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.PluginBase">
+            <summary>
+            全ての BveEX プラグインの基本クラスを表します。
+            </summary>
+            <remarks>
+            このクラスを直接継承する必要があるのは、特殊な BveEX プラグインの場合のみです。
+            アセンブリ (.dll) 形式の通常の BveEX プラグインでは <see cref="T:BveEx.PluginHost.Plugins.AssemblyPluginBase"/> を継承してください。
+            </remarks>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.PluginType">
+            <summary>
+            この BveEX プラグインの種類を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.MinRequiredVersion">
+            <summary>
+            この BveEX プラグインが必要とする BveEX 本体の最低バージョンを取得します。最低バージョンが設定されていない場合は <see langword="null"/> を返します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Extensions">
+            <summary>
+            読み込まれた BveEX 拡張機能の一覧を取得します。
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item>BveEX 拡張機能の場合 (<see cref="P:BveEx.PluginHost.Plugins.PluginBase.PluginType"/> が <see cref="F:BveEx.PluginHost.Plugins.PluginType.Extension"/> の場合)、<see cref="E:BveEx.PluginHost.Plugins.Extensions.IExtensionSet.AllExtensionsLoaded"/> イベントが発生するまでは項目を取得できません。</item>
+            <item>BveEX 拡張機能以外の BveEX プラグインは <see cref="P:BveEx.PluginHost.Plugins.PluginBase.Plugins"/> プロパティから取得できます。</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Plugins">
+            <summary>
+            読み込まれた BveEX プラグインの一覧を取得します。
+            </summary>
+            <remarks>
+            <list type="bullet">
+            <item>BveEX 拡張機能の場合 (<see cref="P:BveEx.PluginHost.Plugins.PluginBase.PluginType"/> が <see cref="F:BveEx.PluginHost.Plugins.PluginType.Extension"/> の場合) は取得できません。</item>
+            <item>BveEX 拡張機能は <see cref="P:BveEx.PluginHost.Plugins.PluginBase.Extensions"/> プロパティから取得できます。</item>
+            </list>
+            </remarks>
+            <seealso cref="P:BveEx.PluginHost.Plugins.PluginBase.Extensions"/>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.BveHacker">
+            <summary>
+            本来 ATS プラグインからは利用できない BVE 本体の諸機能へアクセスするための <see cref="T:BveEx.PluginHost.IBveHacker"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Identifier">
+            <summary>
+            PluginUsing ファイルで指定したこの BveEX プラグインの識別子を取得します。このプロパティの値は全プラグインにおいて一意であることが保証されています。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Location">
+            <summary>
+            この BveEX プラグインのファイルの完全パスを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Name">
+            <summary>
+            この BveEX プラグインのファイル名を取得します。
+            </summary>
+            <remarks>
+            通常はプラグイン パッケージ ファイルの名前と拡張子 (例: MyPlugin.dll) を表しますが、<br/>
+            スクリプト プラグインの場合など、ファイル名でプラグインを判別できない場合 (例: Package.xml) は代替の文字列を使用することもできます。
+            </remarks>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Title">
+            <summary>
+            この BveEX プラグインのタイトルを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Version">
+            <summary>
+            この BveEX プラグインのバージョンを表す文字列を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Description">
+            <summary>
+            この BveEX プラグインの説明を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.Plugins.PluginBase.Copyright">
+            <summary>
+            この BveEX プラグインの著作権表示を取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.PluginBase.#ctor(BveEx.PluginHost.Plugins.PluginBuilder,BveEx.PluginHost.Plugins.PluginAttribute)">
+            <summary>
+            動的に作成された <see cref="T:BveEx.PluginHost.Plugins.PluginAttribute"/> 属性を参照して、BveEX プラグインの新しいインスタンスを初期化します。
+            </summary>
+            <param name="builder">BveEX から渡される BVE、BveEX の情報。</param>
+            <param name="info">プラグインの詳細な仕様を指定する <see cref="T:BveEx.PluginHost.Plugins.PluginAttribute"/>。</param>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.PluginBase.#ctor(BveEx.PluginHost.Plugins.PluginBuilder)">
+            <summary>
+            クラスに付加されている <see cref="T:BveEx.PluginHost.Plugins.PluginAttribute"/> 属性を参照して、BveEX プラグインの新しいインスタンスを初期化します。
+            </summary>
+            <remarks>
+            <see cref="T:BveEx.PluginHost.Plugins.PluginAttribute"/> を付加して、プラグインの詳細な仕様を指定してください。
+            </remarks>
+            <param name="builder">BveEX から渡される BVE、BveEX の情報。</param>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.PluginBase.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:BveEx.PluginHost.Plugins.PluginBase.Tick(System.TimeSpan)">
+            <summary>
+            通常の ATS プラグインの Elapse 関数と同様のタイミングで、運転中毎フレーム呼び出されます。
+            </summary>
+            <param name="elapsed">前フレームから経過した時間。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.Plugins.ScriptLanguage">
+            <summary>
+            スクリプト言語を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Plugins.ScriptLanguage.CSharpScript">
+            <summary>
+            C# スクリプトを指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Plugins.ScriptLanguage.IronPython2">
+            <summary>
+            IronPython 2 を指定します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Direction">
+            <summary>
+            方向を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Direction.Forward">
+            <summary>
+            前方を指定します。
+            </summary>
+        </member>
+        <member name="F:BveEx.PluginHost.Direction.Backward">
+            <summary>
+            後方を指定します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.ScenarioCreatedEventArgs">
+            <summary>
+            <see cref="E:BveEx.PluginHost.IBveHacker.PreviewScenarioCreated"/>、<see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> イベントのデータを提供します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.ScenarioCreatedEventArgs.Scenario">
+            <summary>
+            生成された <see cref="T:BveTypes.ClassWrappers.Scenario"/> クラスのインスタンスを取得します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.ScenarioCreatedEventArgs.#ctor(BveTypes.ClassWrappers.Scenario)">
+            <summary>
+            <see cref="T:BveEx.PluginHost.ScenarioCreatedEventArgs"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="scenario">生成された <see cref="T:BveTypes.ClassWrappers.Scenario"/> クラスのインスタンス。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.PropertyNotInitializedException">
+            <summary>
+            まだ初期化されておらず取得できないプロパティを取得しようとしたときにスローされる例外です。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.PropertyNotInitializedException.#ctor(System.String)">
+            <summary>
+            <see cref="T:BveEx.PluginHost.PropertyNotInitializedException"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="propertyName">この例外の対象となるプロパティの名前。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.ScenarioOpenedEventHandler">
+            <summary>
+            <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioOpened"/> イベントを処理するメソッドを表します。
+            </summary>
+            <param name="e">イベント データを格納している <see cref="T:BveEx.PluginHost.ScenarioOpenedEventArgs"/>。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.ScenarioClosedEventHandler">
+            <summary>
+            <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioClosed"/> イベントを処理するメソッドを表します。
+            </summary>
+            <param name="e">イベント データを格納している <see cref="T:System.EventArgs"/>。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.ScenarioCreatedEventHandler">
+            <summary>
+            <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> または <see cref="E:BveEx.PluginHost.IBveHacker.PreviewScenarioCreated"/> イベントを処理するメソッドを表します。
+            </summary>
+            <param name="e">イベント データを格納している <see cref="T:BveEx.PluginHost.ScenarioCreatedEventArgs"/>。</param>
+        </member>
+        <member name="T:BveEx.PluginHost.IBveHacker">
+            <summary>
+            本来 ATS プラグインからは利用できない BVE 本体の諸機能へアクセスするための機能を提供します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.BveTypes">
+            <summary>
+            クラスラッパーに対応する BVE の型とメンバーの定義を表す <see cref="T:BveTypes.BveTypeSet"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.MainFormHandle">
+            <summary>
+            BVE のメインフォームのハンドルを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.MainFormSource">
+            <summary>
+            BVE のメインフォームの <see cref="T:System.Windows.Forms.Form"/> インスタンスを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.MainForm">
+            <summary>
+            BVE のメインフォームを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.IsConfigFormReady">
+            <summary>
+            BVE の「設定」フォームが表示できる状態にあるかどうかを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.ConfigFormSource">
+            <summary>
+            BVE の「設定」フォームの <see cref="T:System.Windows.Forms.Form"/> インスタンスを取得します。
+            </summary>
+            <remarks>
+            表示中以外は <see langword="null"/> を返します。また、再表示する度に異なるインスタンスとなるため注意してください。
+            </remarks>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.ConfigForm">
+            <summary>
+            BVE の「設定」フォームを取得します。
+            </summary>
+            <remarks>
+            表示中以外は <see langword="null"/> を返します。また、再表示する度に異なるインスタンスとなるため注意してください。
+            </remarks>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.ScenarioSelectionFormSource">
+            <summary>
+            BVE の「シナリオの選択」フォームの <see cref="T:System.Windows.Forms.Form"/> インスタンスを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.ScenarioSelectionForm">
+            <summary>
+            BVE の「シナリオの選択」フォームを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.LoadingProgressFormSource">
+            <summary>
+            BVE の「シナリオを読み込んでいます...」フォームの <see cref="T:System.Windows.Forms.Form"/> インスタンスを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.LoadingProgressForm">
+            <summary>
+            BVE の「シナリオを読み込んでいます...」フォームを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.TimePosFormSource">
+            <summary>
+            BVE の「時刻と位置」フォームの <see cref="T:System.Windows.Forms.Form"/> インスタンスを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.TimePosForm">
+            <summary>
+            BVE の「時刻と位置」フォームを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.ChartFormSource">
+            <summary>
+            BVE の「車両物理量」フォームの <see cref="T:System.Windows.Forms.Form"/> インスタンスを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.ChartForm">
+            <summary>
+            BVE の「車両物理量」フォームを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.DirectSound">
+            <summary>
+            BVE が使用する DirectSound デバイスを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.Assistants">
+            <summary>
+            補助表示のセットを取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.InputManager">
+            <summary>
+            キー入力を管理する <see cref="T:BveTypes.ClassWrappers.InputManager"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.Preferences">
+            <summary>
+            BVE の設定が格納された <see cref="T:Mackoy.Bvets.Preferences"/> を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.MapLoader">
+            <summary>
+            現在実行中のシナリオの読込に使用されている <see cref="T:BveTypes.ClassWrappers.MapLoader"/> を取得します。
+            </summary>
+            <remarks>
+            シナリオが読み込まれていない時は <see langword="null"/> になります。
+            </remarks>
+        </member>
+        <member name="E:BveEx.PluginHost.IBveHacker.ScenarioOpened">
+            <summary>
+            シナリオが選択され、読込を開始したときに発生します。
+            </summary>
+            <remarks>
+            読み込まれたシナリオを表す <see cref="T:BveTypes.ClassWrappers.Scenario"/> を取得するには、<see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> または <see cref="E:BveEx.PluginHost.IBveHacker.PreviewScenarioCreated"/> イベントを使用してください。
+            </remarks>
+        </member>
+        <member name="E:BveEx.PluginHost.IBveHacker.ScenarioClosed">
+            <summary>
+            シナリオが閉じられたときに発生します。
+            </summary>
+        </member>
+        <member name="E:BveEx.PluginHost.IBveHacker.PreviewScenarioCreated">
+            <summary>
+            <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> が発生する直前に通知します。特に理由がなければ <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> を使用してください。
+            </summary>
+        </member>
+        <member name="E:BveEx.PluginHost.IBveHacker.ScenarioCreated">
+            <summary>
+            <see cref="T:BveTypes.ClassWrappers.Scenario"/> のインスタンスが生成されたときに通知します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.ScenarioInfo">
+            <summary>
+            現在読込中または実行中のシナリオの情報を取得します。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.Scenario">
+            <summary>
+            現在実行中のシナリオを取得します。シナリオの読込中は <see cref="T:System.InvalidOperationException"/> をスローします。
+            シナリオの読込中に <see cref="T:BveTypes.ClassWrappers.Scenario"/> を取得するには <see cref="E:BveEx.PluginHost.IBveHacker.ScenarioCreated"/> イベントを購読してください。
+            </summary>
+        </member>
+        <member name="P:BveEx.PluginHost.IBveHacker.IsScenarioCreated">
+            <summary>
+            <see cref="P:BveEx.PluginHost.IBveHacker.Scenario"/> が取得可能かどうかを取得します。
+            </summary>
+        </member>
+        <member name="E:BveEx.PluginHost.IBveHacker.PreviewTick">
+            <summary>
+            拡張機能、プラグインの <see cref="M:BveEx.PluginHost.Plugins.PluginBase.Tick(System.TimeSpan)"/> メソッドの呼出処理を開始する直前に発生します。
+            </summary>
+        </member>
+        <member name="E:BveEx.PluginHost.IBveHacker.PostTick">
+            <summary>
+            拡張機能、プラグインの <see cref="M:BveEx.PluginHost.Plugins.PluginBase.Tick(System.TimeSpan)"/> メソッドの呼出処理が完了したときに発生します。
+            </summary>
+        </member>
+        <member name="T:BveEx.PluginHost.Troubleshooting.ITroubleshooter">
+            <summary>
+            トラブルシューティングプラグインを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.PluginHost.Troubleshooting.ITroubleshooter.Resolve(System.Exception)">
+            <summary>
+            例外の解決を試みます。
+            </summary>
+            <param name="exception">解決を試みる例外。</param>
+            <returns><paramref name="exception"/> の解決に成功したかどうか。</returns>
+        </member>
+    </members>
+</doc>

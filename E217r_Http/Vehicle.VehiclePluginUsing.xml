@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<BveExPluginUsing>
+ <Assembly Path="BveEX_Uchibo20_E217r_Http.dll" />
+</BveExPluginUsing>

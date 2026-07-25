@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BveEx.Diagnostics</name>
+    </assembly>
+    <members>
+        <member name="T:BveEx.Diagnostics.ErrorDialog">
+            <summary>
+            ユーザーに対してエラーが発生したことを知らせるダイアログを表します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Diagnostics.ErrorDialog.Show(BveEx.Diagnostics.ErrorDialogInfo)">
+            <summary>
+            エラーダイアログを表示します。
+            </summary>
+            <param name="info">ダイアログの表示内容。</param>
+        </member>
+        <member name="T:BveEx.Diagnostics.ErrorDialogInfo">
+            <summary>
+            <see cref="T:BveEx.Diagnostics.ErrorDialog"/> の表示内容を指定します。
+            </summary>
+        </member>
+        <member name="P:BveEx.Diagnostics.ErrorDialogInfo.Caption">
+            <summary>
+            ダイアログのキャプションを取得・設定します。
+            </summary>
+            <remarks>
+            <see langword="null"/> を指定すると <see cref="P:BveEx.Diagnostics.ErrorDialogInfo.Sender"/> の値で代用されます。
+            </remarks>
+        </member>
+        <member name="P:BveEx.Diagnostics.ErrorDialogInfo.Header">
+            <summary>
+            ダイアログのヘッダー部分に表示するテキストを取得・設定します。
+            </summary>
+            <remarks>
+            エラーの内容を端的に表すメッセージを指定してください。<see langword="null"/> を指定すると「エラーが発生しました」と表示されます。
+            </remarks>
+        </member>
+        <member name="P:BveEx.Diagnostics.ErrorDialogInfo.Sender">
+            <summary>
+            エラーの発生元を表すテキストを取得・設定します。
+            </summary>
+            <remarks>
+            <see langword="null"/> を指定すると「(指定なし)」と表示されます。
+            </remarks>
+        </member>
+        <member name="P:BveEx.Diagnostics.ErrorDialogInfo.Message">
+            <summary>
+            エラーの原因などを説明するテキストを取得・設定します。
+            </summary>
+            <remarks>
+            <see langword="null"/> を指定すると省略されます。
+            </remarks>
+        </member>
+        <member name="P:BveEx.Diagnostics.ErrorDialogInfo.Approach">
+            <summary>
+            エラーを解決する方法を説明するテキストを取得・設定します。
+            </summary>
+            <remarks>
+            <see langword="null"/> を指定すると省略されます。
+            </remarks>
+        </member>
+        <member name="P:BveEx.Diagnostics.ErrorDialogInfo.HelpLink">
+            <summary>
+            エラーの詳細が説明されているコンテンツへのリンクを表す URI を取得・設定します。
+            </summary>
+            <remarks>
+            <see langword="null"/> を指定すると省略されます。
+            </remarks>
+        </member>
+        <member name="M:BveEx.Diagnostics.ErrorDialogInfo.#ctor(System.String,System.String,System.String)">
+            <summary>
+            <see cref="T:BveEx.Diagnostics.ErrorDialogInfo"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+            <param name="header">ダイアログのヘッダー部分に表示するテキスト。エラーの内容を端的に表すメッセージを指定してください。<see langword="null"/> を指定すると「エラーが発生しました」と表示されます。</param>
+            <param name="sender">エラーの発生元を表すテキスト。<see langword="null"/> を指定すると「(指定なし)」と表示されます。</param>
+            <param name="message">エラーの原因などを説明するテキスト。<see langword="null"/> を指定すると省略されます。</param>
+        </member>
+        <member name="T:BveEx.Diagnostics.WrapperExceptionExtractor">
+            <summary>
+            例外をラップしている <see cref="T:System.AggregateException"/> などの例外を一元的に解決するための機能を提供します。
+            </summary>
+            <remarks>
+            異なるバージョン間において、例外の展開方法が一意である保証はありませんので注意してください。
+            </remarks>
+        </member>
+        <member name="M:BveEx.Diagnostics.WrapperExceptionExtractor.#ctor">
+            <summary>
+            <see cref="T:BveEx.Diagnostics.WrapperExceptionExtractor"/> クラスの新しいインスタンスを初期化します。
+            </summary>
+        </member>
+        <member name="M:BveEx.Diagnostics.WrapperExceptionExtractor.Resolve(System.String,System.Exception)">
+            <summary>
+            指定された例外が他の例外をラップしている場合は展開し、ラップされている全ての例外に対して <see cref="M:BveEx.Diagnostics.WrapperExceptionExtractor.Throw(System.String,System.Exception,System.Boolean)"/> メソッドを実行します。
+            ラップしていない場合はその例外に対して直接呼び出します。
+            </summary>
+            <param name="senderName">例外の発生元の名前。</param>
+            <param name="exception">解決する例外。</param>
+        </member>
+        <member name="M:BveEx.Diagnostics.WrapperExceptionExtractor.Throw(System.String,System.Exception,System.Boolean)">
+            <summary>
+            検知した例外を再度スローします。
+            </summary>
+            <remarks>
+            このメソッドはオーバーライド可能です。
+            </remarks>
+            <param name="senderName">例外の発生元の名前。</param>
+            <param name="exception">スローする例外。</param>
+            <param name="isWrapperException"><paramref name="exception"/> が他の例外をラップした例外であるかどうか。</param>
+        </member>
+    </members>
+</doc>

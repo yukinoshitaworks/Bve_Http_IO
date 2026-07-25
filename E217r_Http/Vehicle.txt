@@ -1,0 +1,8 @@
+BveTs Vehicle 2.00
+PerformanceCurve = ..\..\Uchibo20\E217r\Notch\Notch.txt
+Parameters = ..\..\Uchibo20\E217r\Parameters.txt
+Panel = ..\..\Uchibo20\E217r\Panel\Panel.txt
+Sound = ..\..\Uchibo20\E217r\Sound.cfg
+Ats32 = ..\..\Uchibo20\E217r\Ats\x86\DetailManager.dll
+Ats64 = ..\..\Uchibo20\E217r\Ats\x64\DetailManager.dll
+MotorNoise = ..\..\Uchibo20\E217r\Sound\Motor.txt
