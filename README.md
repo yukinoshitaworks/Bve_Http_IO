@@ -27,8 +27,9 @@ BVEプラグイン(C#, VehiclePlugin)  --Tick毎--  Pythonブリッジサーバ�
 ## フォルダ構成
 
 ```
-115_Http/                  115系用の完成品一式（BVEの車両データフォルダにそのまま配置できる）
-E217r_Http/                E217r用の完成品一式（同上）
+Yokokura/
+  115_Http/                115系用の完成品一式（BVEの車両データフォルダにそのまま配置できる）
+  E217r_Http/               E217r用の完成品一式（同上）
 Source/                    C#プラグインのソース(Visual Studio 2022 / .NET Framework 4.8)
   BveEX_RockOn_115_Http/
   BveEX_Uchibo20_E217r_Http/
@@ -38,7 +39,7 @@ NodeRED/
 
 ## 導入方法
 
-1. `115_Http/` または `E217r_Http/` フォルダを、対象車両のデータフォルダとしてBVEのシナリオから
+1. `Yokokura/115_Http/` または `Yokokura/E217r_Http/` フォルダを、対象車両のデータフォルダとしてBVEのシナリオから
    参照できる場所に配置する。
    - `Vehicle.txt` / `Vehicle.VehiclePluginUsing.xml` は元になった車両データを前提にした
      サンプルです。`PerformanceCurve` / `Panel` などのパスは環境に合わせて書き換えてください。
