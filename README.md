@@ -21,8 +21,8 @@ BVEプラグイン(C#, VehiclePlugin)  --Tick毎--  Pythonブリッジサーバ�
 
 対応車両（プラグイン部分は共通ロジック、車両ごとに別アセンブリとしてビルド）:
 
-- `Rock_On_115_taka_T1040` — RockOn 115系用
-- `Uchibo20_E217r` — Uchibo20 E217系(改)用
+- `Rock_On_115_taka_T1040` — RockOn氏115系 高タカT1040編成用
+- `Uchibo20_E217r` — 内房線E217系用
 
 ## フォルダ構成
 
@@ -80,6 +80,12 @@ NodeRED/
   パスが異なる場合は `.csproj` の `HintPath` を書き換えてください。
 - `packages/` (BveEx.CoreExtensions / BveEx.Diagnostics / BveEx.PluginHost の NuGet パッケージ)は
   このリポジトリには含めていません。Visual Studio でNuGetの復元を行ってください。
+
+## 著作権について
+
+本コードの(生成AIを用いた)改造/Pull Request/Isuueは歓迎いたします。ご自身が製作した車両データや路線データに組み込む際も連絡は不要です(配布される場合readme等に記載いただければ嬉しいです)。
+ユーザー各自の所有している実物機器への対応や、他の作者さんの車両データに対応した改造なども問題ありませんが、データ作者の皆様にご迷惑が掛からない形で進めていただくようお願いいたします。
+
 
 ## 既知の制限・注意点
 
