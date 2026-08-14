@@ -2,7 +2,7 @@
   {
     "id": "aa11000000000001",
     "type": "tab",
-    "label": "BVE HTTP制御",
+    "label": "BVE HTTP_IO",
     "disabled": false,
     "info": "",
     "env": []
@@ -10,7 +10,7 @@
   {
     "id": "aa11000000000002",
     "type": "ui_tab",
-    "name": "BVE (HTTP)",
+    "name": "BVE HTTP ダッシュボード",
     "icon": "dashboard",
     "disabled": false,
     "hidden": false
@@ -18,7 +18,7 @@
   {
     "id": "aa11000000000003",
     "type": "ui_group",
-    "name": "リバーサー",
+    "name": "レバーサ",
     "tab": "aa11000000000002",
     "order": 1,
     "disp": true,
@@ -29,7 +29,7 @@
   {
     "id": "aa11000000000004",
     "type": "ui_group",
-    "name": "主幹制御器 (Power)",
+    "name": "マスコン",
     "tab": "aa11000000000002",
     "order": 2,
     "disp": true,
